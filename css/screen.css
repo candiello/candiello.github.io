@@ -1,103 +1,535 @@
 /*
 	Sito: www.anthonycandiello.it
-	Autore: duemme web
-	http://mmalgare.netsons.org
+	Restyle 2026
 */
 
-a:hover{text-decoration: none;}
+:root{
+	--sand-50:#fbf4ea;
+	--sand-100:#f4e5cf;
+	--sand-200:#e9d0a7;
+	--sand-300:#d8b987;
+	--sand-500:#b47d44;
+	--sand-700:#7e4f26;
+	--stone-900:#2f2419;
+	--stone-700:#5b4a39;
+	--stone-500:#8b7763;
+	--stone-300:#cbb9a4;
+	--paper:#fffaf3;
+	--white:#ffffff;
+	--shadow:0 20px 50px rgba(85, 52, 26, 0.12);
+	--shadow-soft:0 12px 28px rgba(85, 52, 26, 0.08);
+}
+
+html{
+	scroll-behavior:smooth;
+}
+
+*{
+	box-sizing:border-box;
+}
+
+body{
+	margin:0;
+	padding:32px 16px 48px;
+	color:var(--stone-900);
+	font:18px/1.7 "Palatino Linotype", "Book Antiqua", Georgia, serif;
+	background:
+		radial-gradient(circle at top left, rgba(255,255,255,0.72), transparent 32%),
+		radial-gradient(circle at top right, rgba(233,208,167,0.38), transparent 24%),
+		linear-gradient(180deg, #f8efdfff 0%, #f5e7cf 42%, #f8f1e5 100%);
+}
+
+a{
+	color:var(--sand-700);
+	text-decoration-color:rgba(126, 79, 38, 0.35);
+	text-underline-offset:0.18em;
+	transition:color 0.2s ease, text-decoration-color 0.2s ease, opacity 0.2s ease;
+}
+
+a:hover{
+	color:#9a5e22;
+	text-decoration-color:currentColor;
+}
+
+h1, h2, h3, h4{
+	margin:0;
+	font-weight:normal;
+	line-height:1.1;
+	color:var(--stone-900);
+}
 
 h1{
-	font-size: 4em;
-	font-weight: normal;
-	margin-bottom: 10px;
-	margin-top: 0px;
+	font-size:clamp(3rem, 7vw, 4.8rem);
+	letter-spacing:0.03em;
 }
 
 h2{
-	font-size: 2.5em;
-	font-weight: normal;
+	font-size:clamp(2rem, 4vw, 2.8rem);
+	margin-bottom:28px;
+	padding-bottom:18px;
+	border-bottom:1px solid rgba(126, 79, 38, 0.18);
 }
 
 h3{
-	font-size: 1.5em;
-	font-weight: normal;
+	font-size:1.45rem;
+	margin-bottom:12px;
 }
 
 h4{
-	font-size: 1.5em;
-	font-weight: normal;
-	margin-top: 10px;
+	font-size:1.1rem;
+	letter-spacing:0.06em;
+	text-transform:uppercase;
 }
 
-.clear{ clear: both;}
+p, ol, ul{
+	margin-top:0;
+}
 
-body{
-	margin: 0;
-	padding: 0;
-	text-align: center; /* per ie5.x/Win */
-	background: #fff;
-	color: #1a1a1a;
-	font: 95% "Times New Roman", Times;
+ol{
+	padding-left:1.3rem;
+}
 
+li{
+	margin-bottom:0.9rem;
+}
+
+img{
+	max-width:100%;
+	height:auto;
+	display:block;
+}
+
+.clear{
+	clear:both;
 }
 
 #page-wrap{
-	width: 850px;
-	margin: 1em auto;
-	text-align: left; /* per ie5.x/Win */
-	border-top: #1a1a1a 5px solid;
+	width:min(1120px, 100%);
+	margin:0 auto;
+	padding:28px;
+	background:rgba(255, 250, 243, 0.88);
+	border:1px solid rgba(126, 79, 38, 0.12);
+	border-radius:30px;
+	box-shadow:var(--shadow);
+	backdrop-filter:blur(6px);
 }
 
-
 #header-wrap{
-	width: 100%;
+	position:relative;
+	display:grid;
+	grid-template-columns:minmax(0, 1.3fr) minmax(260px, 0.9fr);
+	gap:28px;
+	padding:26px 28px 30px;
+	border-radius:24px;
+	background:
+		linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,244,227,0.86)),
+		linear-gradient(180deg, rgba(216,185,135,0.2), rgba(255,255,255,0));
+	border:1px solid rgba(126, 79, 38, 0.12);
+	overflow:hidden;
+}
+
+#header-wrap::after{
+	content:"";
+	position:absolute;
+	inset:auto -70px -90px auto;
+	width:260px;
+	height:260px;
+	border-radius:50%;
+	background:radial-gradient(circle, rgba(216,185,135,0.5) 0%, rgba(216,185,135,0.08) 58%, transparent 68%);
 }
 
 #menu{
-	position: absolute;
-	margin-left: 375px;
-	margin-top: 65px;
-	padding: 0;
-	
-}
-
-#menu a{
-	color: #1a1a1a;
-	font-size: 1.4em;
+	position:static;
+	grid-column:1 / -1;
+	order:3;
+	margin:0;
+	padding-top:6px;
 }
 
 #menu ul{
-	margin: 0;
-	padding: 0;
+	display:flex;
+	flex-wrap:wrap;
+	gap:12px;
+	margin:0;
+	padding:0;
 }
 
 #menu li{
-	display: inline;
-	list-style: none;
-	margin: 20px;
+	display:block;
+	list-style:none;
+	margin:0;
+}
+
+#menu a{
+	display:inline-flex;
+	align-items:center;
+	padding:0.7rem 1rem;
+	border-radius:999px;
+	font:600 0.95rem/1 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing:0.04em;
+	text-transform:uppercase;
+	color:var(--stone-900);
+	text-decoration:none;
+	background:rgba(255,255,255,0.66);
+	border:1px solid rgba(126, 79, 38, 0.14);
+	box-shadow:var(--shadow-soft);
+}
+
+#menu a:hover{
+	background:rgba(244,229,207,0.92);
+	transform:translateY(-1px);
+}
+
+#menu a.is-active{
+	background:var(--stone-900);
+	border-color:var(--stone-900);
+	color:#fff;
+}
+
+/* Sezioni a scomparsa (js/sections.js): senza JavaScript restano visibili */
+.js-sections .toggle-section{
+	display:none;
+}
+
+.js-sections .toggle-section.is-open{
+	display:block;
+}
+
+#logo-wrap,
+#slogan,
+#language{
+	position:relative;
+	z-index:1;
+}
+
+#logo-wrap{
+	align-self:end;
+}
+
+#slogan{
+	display:flex;
+	align-items:flex-end;
+	justify-content:flex-end;
+	text-align:right;
 }
 
 #slogan h4{
-	color: #999999;
+	max-width:22ch;
+	color:var(--stone-700);
 }
 
-#subheader-wrap{clear: both;}
+#language{
+	grid-column:2;
+	align-self:start;
+	justify-self:end;
+}
+
+#language h3{
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+	justify-content:flex-end;
+	gap:10px 18px;
+	font:600 0.92rem/1.4 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	color:var(--stone-700);
+}
+
+#language a,
+.language-label{
+	display:inline-flex;
+	align-items:center;
+	gap:10px;
+	padding:0.55rem 0.85rem;
+	border-radius:999px;
+	background:rgba(255,255,255,0.66);
+	border:1px solid rgba(126, 79, 38, 0.14);
+	text-decoration:none;
+}
+
+#subheader-wrap{
+	display:grid;
+	grid-template-columns:minmax(260px, 340px) minmax(0, 1fr);
+	gap:32px;
+	margin-top:26px;
+	padding:28px;
+	border-radius:28px;
+	background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,247,235,0.95));
+	border:1px solid rgba(126, 79, 38, 0.1);
+	box-shadow:var(--shadow-soft);
+}
 
 #subheader-wrap img{
-	float: left;
-	margin: 0 25px 0 15px;
+	float:none;
+	width:100%;
+	margin:0;
+	border-radius:24px;
+	object-fit:cover;
+	box-shadow:var(--shadow);
 }
 
-#content-wrap{clear: both; margin-top: 85px;}
-.content-box h2{width: 100%; border-bottom: solid 1px #ccc;}
-.argomento{margin-bottom: 40px;}
-.argomento img{float: left; margin: 0 35px 0 0;}
-.corpo-box{display: block; margin-left: 40px;}
+#presentazione{
+	font-size:1.05rem;
+}
 
-.book{margin-bottom: 25px;}
-.book h3{margin: 0px; padding: 0px;}
-.book img{float: left; margin: 0 20px 0 0;}
-.descrizione{float: left; width: 40%; margin: 0px; padding: 0px;}
+#presentazione p{
+	margin-bottom:1.1rem;
+}
 
-#footer-wrap{margin-top: 20px; color: #fff; background: #1a1a1a; padding: 10px;}
-#footer-wrap a{color: #fff;}
+.highlight-title,
+#presentazione font{
+	color:var(--sand-700);
+}
+
+.intro-actions{
+	display:flex;
+	flex-wrap:wrap;
+	gap:14px;
+	margin-top:1.5rem;
+}
+
+.intro-actions a{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	padding:0.9rem 1.2rem;
+	border-radius:999px;
+	background:var(--stone-900);
+	color:var(--paper);
+	text-decoration:none;
+	font:600 0.95rem/1 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing:0.03em;
+	box-shadow:var(--shadow-soft);
+}
+
+.intro-actions a:last-child{
+	background:transparent;
+	color:var(--sand-700);
+	border:1px solid rgba(126, 79, 38, 0.24);
+}
+
+#content-wrap{
+	clear:both;
+	margin-top:28px;
+}
+
+.content-box{
+	margin-top:24px;
+	padding:28px;
+	border-radius:26px;
+	background:rgba(255,255,255,0.74);
+	border:1px solid rgba(126, 79, 38, 0.1);
+	box-shadow:var(--shadow-soft);
+}
+
+.argomento{
+	display:grid;
+	grid-template-columns:56px minmax(0, 1fr);
+	gap:18px;
+	align-items:start;
+	margin-bottom:32px;
+	padding:22px;
+	border-radius:20px;
+	background:linear-gradient(180deg, rgba(251,244,234,0.78), rgba(255,255,255,0.92));
+	border:1px solid rgba(126, 79, 38, 0.08);
+}
+
+.argomento img,
+.section-icon{
+	width:56px;
+	height:56px;
+	margin:0;
+	border-radius:18px;
+	background:linear-gradient(180deg, rgba(244,229,207,0.95), rgba(255,255,255,0.95));
+	box-shadow:var(--shadow-soft);
+}
+
+.argomento img{
+	float:none;
+	padding:10px;
+}
+
+.section-icon{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:0;
+	color:var(--stone-900);
+}
+
+.icon-pub::before,
+.icon-formazione::before,
+.icon-relazioni::before{
+	display:block;
+	font-size:1.15rem;
+}
+
+.icon-pub{
+	color:#8d5726;
+}
+
+.icon-pub::before{
+	content:"DOC";
+	font-size:0.82rem;
+}
+
+.icon-formazione{
+	color:#6c4a2b;
+}
+
+.icon-formazione::before{
+	content:"TALK";
+	font-size:0.72rem;
+}
+
+.icon-relazioni{
+	color:#5a3d24;
+}
+
+.icon-relazioni::before{
+	content:"BIZ";
+	font-size:0.82rem;
+}
+
+.corpo-box{
+	display:block;
+	margin-left:0;
+	min-width:0;
+}
+
+.argomento .corpo-box ol{
+	margin-left:calc(-56px - 18px);
+	padding-left:calc(1.3rem + 8px);
+}
+
+.book{
+	display:grid;
+	grid-template-columns:160px minmax(0, 1fr);
+	gap:16px;
+	align-items:start;
+	margin-bottom:20px;
+	padding:22px;
+	border-radius:20px;
+	background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(251,244,234,0.82));
+	border:1px solid rgba(126, 79, 38, 0.08);
+	box-shadow:var(--shadow-soft);
+}
+
+.book > a[name]{
+	display:none;
+}
+
+.book h3{
+	margin-bottom:10px;
+}
+
+.book img{
+	float:none;
+	width:160px;
+	margin:0;
+	border-radius:12px;
+	box-shadow:var(--shadow-soft);
+	grid-column:1;
+	grid-row:1;
+}
+
+.descrizione{
+	float:none;
+	width:100%;
+	max-width:none;
+	min-width:0;
+	margin:0;
+	padding:0;
+	grid-column:2;
+	grid-row:1;
+}
+
+.book > .clear{
+	display:none;
+}
+
+#contatti + h2,
+#contatti{
+	scroll-margin-top:24px;
+}
+
+#footer-wrap{
+	margin-top:24px;
+	padding:20px 26px;
+	color:var(--paper);
+	background:linear-gradient(135deg, #4f351f, #7e4f26);
+	border-radius:20px;
+	font:600 0.92rem/1.5 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing:0.03em;
+}
+
+#footer-wrap a{
+	color:var(--paper);
+}
+
+@media (max-width: 900px){
+	body{
+		padding:18px 10px 36px;
+		font-size:17px;
+	}
+
+	#page-wrap{
+		padding:14px;
+		border-radius:24px;
+	}
+
+	#header-wrap,
+	#subheader-wrap{
+		grid-template-columns:1fr;
+		padding:22px;
+	}
+
+	#slogan,
+	#language{
+		grid-column:auto;
+		justify-self:start;
+		text-align:left;
+	}
+
+	#slogan{
+		align-items:flex-start;
+	}
+
+	#language h3{
+		justify-content:flex-start;
+	}
+
+	.content-box,
+	.argomento,
+	.book{
+		padding:20px;
+	}
+}
+
+@media (max-width: 640px){
+	h1{
+		font-size:2.7rem;
+	}
+
+	h2{
+		font-size:1.75rem;
+	}
+
+	#menu ul,
+	.intro-actions{
+		flex-direction:column;
+		align-items:stretch;
+	}
+
+	.argomento img{
+		float:none;
+		margin:0 0 18px;
+	}
+
+	.argomento{
+		grid-template-columns:1fr;
+	}
+
+	.book{
+		grid-template-columns:1fr;
+	}
+}
