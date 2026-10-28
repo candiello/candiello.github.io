@@ -224,26 +224,42 @@ img{
 	justify-self:end;
 }
 
-#language h3{
-	display:flex;
-	flex-wrap:wrap;
-	align-items:center;
-	justify-content:flex-end;
-	gap:10px 18px;
-	font:600 0.92rem/1.4 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
-	color:var(--stone-700);
-}
-
-#language a,
-.language-label{
+.language-switch{
 	display:inline-flex;
-	align-items:center;
-	gap:10px;
-	padding:0.55rem 0.85rem;
+	padding:3px;
 	border-radius:999px;
 	background:rgba(255,255,255,0.66);
 	border:1px solid rgba(126, 79, 38, 0.14);
+	box-shadow:var(--shadow-soft);
+	font:600 0.85rem/1 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing:0.08em;
+}
+
+.language-switch a,
+.language-switch .is-current{
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	min-width:3rem;
+	padding:0.55rem 0.9rem;
+	border-radius:999px;
 	text-decoration:none;
+}
+
+.language-switch a{
+	color:var(--stone-700);
+	transition:background 0.15s ease;
+}
+
+.language-switch a:hover,
+.language-switch a:focus-visible{
+	background:rgba(244,229,207,0.92);
+	color:var(--stone-900);
+}
+
+.language-switch .is-current{
+	background:var(--stone-900);
+	color:#fff;
 }
 
 #subheader-wrap{
@@ -339,7 +355,8 @@ img{
 	height:56px;
 	margin:0;
 	border-radius:18px;
-	background:linear-gradient(180deg, rgba(244,229,207,0.95), rgba(255,255,255,0.95));
+	background:linear-gradient(180deg, var(--sand-100), var(--sand-50));
+	border:1px solid rgba(126, 79, 38, 0.12);
 	box-shadow:var(--shadow-soft);
 }
 
@@ -352,42 +369,19 @@ img{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	font-size:0;
-	color:var(--stone-900);
+	color:var(--sand-700);
 }
 
-.icon-pub::before,
-.icon-formazione::before,
-.icon-relazioni::before{
-	display:block;
-	font-size:1.15rem;
+.section-icon svg{
+	width:28px;
+	height:28px;
 }
 
-.icon-pub{
-	color:#8d5726;
-}
-
-.icon-pub::before{
-	content:"DOC";
-	font-size:0.82rem;
-}
-
-.icon-formazione{
-	color:#6c4a2b;
-}
-
-.icon-formazione::before{
-	content:"TALK";
-	font-size:0.72rem;
-}
-
-.icon-relazioni{
-	color:#5a3d24;
-}
-
-.icon-relazioni::before{
-	content:"BIZ";
-	font-size:0.82rem;
+/* Il titolo occupa almeno l'altezza dell'icona, cosi' l'elenco parte sotto di essa */
+.argomento .corpo-box h3{
+	min-height:56px;
+	margin-top:0;
+	padding-top:10px;
 }
 
 .corpo-box{
@@ -396,7 +390,8 @@ img{
 	min-width:0;
 }
 
-.argomento .corpo-box ol{
+.argomento .corpo-box ol,
+.argomento .corpo-box ul{
 	margin-left:calc(-56px - 18px);
 	padding-left:calc(1.3rem + 8px);
 }
@@ -448,7 +443,9 @@ img{
 }
 
 #contatti + h2,
-#contatti{
+#contatti,
+#contacts + h2,
+#contacts{
 	scroll-margin-top:24px;
 }
 
@@ -492,10 +489,6 @@ img{
 
 	#slogan{
 		align-items:flex-start;
-	}
-
-	#language h3{
-		justify-content:flex-start;
 	}
 
 	.content-box,

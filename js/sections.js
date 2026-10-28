@@ -1,4 +1,4 @@
-// Sezioni a scomparsa: Pubblicazioni, Formazione e Contatti sono visibili
+// Sezioni a scomparsa: Libri, Pubblicazioni, Docenze e Contatti sono visibili
 // solo dopo aver selezionato il relativo pulsante del menu.
 (function () {
 	var root = document.documentElement;
@@ -20,14 +20,16 @@
 		return null;
 	}
 
-	function show(section) {
+	// extra: altre sezioni da aprire insieme a quella indicata (data-also sul link).
+	function show(section, extra) {
+		var open = [section].concat(extra || []);
 		var all = sections();
 		for (var i = 0; i < all.length; i++) {
-			all[i].classList.toggle('is-open', all[i] === section);
+			all[i].classList.toggle('is-open', !!section && open.indexOf(all[i]) !== -1);
 		}
 		var links = document.querySelectorAll('#menu a[href^="#"]');
 		for (var j = 0; j < links.length; j++) {
-			links[j].classList.toggle('is-active', !!section && sectionFor(links[j].getAttribute('href')) === section);
+			links[j].classList.toggle('is-active', !!section && open.indexOf(sectionFor(links[j].getAttribute('href'))) !== -1);
 		}
 	}
 
@@ -45,7 +47,13 @@
 			show(null);
 			return;
 		}
-		show(section);
+		var extra = [];
+		var also = (link.getAttribute('data-also') || '').split(/\s+/);
+		for (var k = 0; k < also.length; k++) {
+			var other = sectionFor(also[k]);
+			if (other) extra.push(other);
+		}
+		show(section, extra);
 	}, true);
 
 	function openFromHash() {
@@ -59,7 +67,8 @@
 
 	document.addEventListener('DOMContentLoaded', openFromHash);
 	window.addEventListener('hashchange', function () {
+		// Se la sezione è già aperta (es. dal click), non chiudere quelle aperte insieme.
 		var section = sectionFor(location.hash);
-		if (section) show(section);
+		if (section && !section.classList.contains('is-open')) show(section);
 	});
 })();
