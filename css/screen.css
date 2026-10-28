@@ -533,6 +533,18 @@ img{
 		grid-template-columns:1fr;
 	}
 
+	/* Con l'icona sopra il testo gli elenchi non devono rientrare sotto di essa */
+	.argomento .corpo-box ol,
+	.argomento .corpo-box ul{
+		margin-left:0;
+		padding-left:1.3rem;
+	}
+
+	.argomento .corpo-box h3{
+		min-height:0;
+		padding-top:0;
+	}
+
 	.book{
 		grid-template-columns:1fr;
 	}
