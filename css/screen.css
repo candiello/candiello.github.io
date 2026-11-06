@@ -605,3 +605,11 @@ img{
 		grid-template-columns:1fr;
 	}
 }
+
+#footer-wrap .ai-disclaimer{
+	margin-top:8px;
+	font-weight:400;
+	font-size:0.8rem;
+	letter-spacing:0;
+	opacity:0.85;
+}
