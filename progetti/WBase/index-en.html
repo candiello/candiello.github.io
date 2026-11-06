@@ -266,6 +266,55 @@
 					<tr><td>6</td><td>Δ</td><td>ddd</td><td class="num">(−3 0)</td></tr>
 				</table></div>
 				<p>All 10 weights have multiplicity 1. The original material gave dds the weight (1 −2), already assigned to dss: the correct value is (−1 −1).</p>
+				<h3>A second example: the meson octet</h3>
+				<p>A meson is made of a quark and an antiquark, according to the product \(3 \otimes \overline{3} = 8 \oplus 1\). With the command <code>P</code> WBase computes it as (0 1) ⊗ (1 0) = (1 1) ⊕ (0 0): the octet plus a singlet.</p>
+				<p>The octet of the pseudoscalar mesons (spin 0) is the irrep 8 = (1 1), the same one that serves as the adjoint representation of SU(3). The antiquarks have the opposite weights of the quarks, \(\bar{u} = (0\ {-1})\), \(\bar{d} = (1\ 0)\) and \(\bar{s} = ({-1}\ 1)\), and the weight of each meson is the sum of the weights of its quark and antiquark:</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Level</th><th>Meson</th><th>Quarks</th><th>Weight</th><th>Multiplicity</th></tr>
+					<tr><td>0</td><td>\(\pi^+\)</td><td>\(u\bar{d}\)</td><td class="num">(1 1)</td><td>1</td></tr>
+					<tr><td>1</td><td>\(K^+\)</td><td>\(u\bar{s}\)</td><td class="num">(−1 2)</td><td>1</td></tr>
+					<tr><td>1</td><td>\(\bar{K}^0\)</td><td>\(s\bar{d}\)</td><td class="num">(2 −1)</td><td>1</td></tr>
+					<tr class="twice"><td>2</td><td>\(\pi^0\), \(\eta_8\)</td><td>\(u\bar{u}\), \(d\bar{d}\), \(s\bar{s}\)</td><td class="num">(0 0)</td><td>2</td></tr>
+					<tr><td>3</td><td>\(K^0\)</td><td>\(d\bar{s}\)</td><td class="num">(−2 1)</td><td>1</td></tr>
+					<tr><td>3</td><td>\(K^-\)</td><td>\(s\bar{u}\)</td><td class="num">(1 −2)</td><td>1</td></tr>
+					<tr><td>4</td><td>\(\pi^-\)</td><td>\(d\bar{u}\)</td><td class="num">(−1 −1)</td><td>1</td></tr>
+				</table></div>
+				<figure>
+					<p class="fig-title">The meson octet is a hexagon with a double centre</p>
+					<p class="fig-sub">Weights of the irrep 8 = (1 1) in the (I₃, Y) plane; under each meson its weight in Dynkin labels</p>
+					<svg class="fig" viewBox="0 60 760 420" role="img" aria-label="Octet of the pseudoscalar mesons" font-size="14">
+					<defs><marker id="arx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b7763"/></marker></defs>
+					<path class="link" d="M150 260H610" marker-end="url(#arx)"/>
+					<path class="link" d="M380 425V85" marker-end="url(#arx)"/>
+					<text class="quiet" x="616" y="264" font-size="12">I₃ (isospin)</text>
+					<text class="quiet" x="380" y="78" font-size="12" text-anchor="middle">Y (hypercharge)</text>
+					<polygon points="530.0,260.0 455.0,130.1 305.0,130.1 230.0,260.0 305.0,389.9 455.0,389.9" fill="rgba(244,229,207,0.45)" stroke="#d8b987" stroke-width="1.5"/>
+					<circle cx="530.0" cy="260.0" r="7" fill="#7e4f26"/>
+					<text class="ink" x="546.0" y="252.0" text-anchor="start" font-size="16" font-style="italic"><tspan>π</tspan><tspan font-size="11" dy="-7">+</tspan></text>
+					<text class="quiet" x="546.0" y="272.0" text-anchor="start" font-size="12">(1 1)</text>
+					<circle cx="455.0" cy="130.1" r="7" fill="#7e4f26"/>
+					<text class="ink" x="471.0" y="100.1" text-anchor="start" font-size="16" font-style="italic"><tspan>K</tspan><tspan font-size="11" dy="-7">+</tspan></text>
+					<text class="quiet" x="471.0" y="117.1" text-anchor="start" font-size="12">(−1 2)</text>
+					<circle cx="305.0" cy="130.1" r="7" fill="#7e4f26"/>
+					<text class="ink" x="289.0" y="100.1" text-anchor="end" font-size="16" font-style="italic"><tspan>K</tspan><tspan font-size="11" dy="-7">0</tspan></text>
+					<text class="quiet" x="289.0" y="117.1" text-anchor="end" font-size="12">(−2 1)</text>
+					<circle cx="230.0" cy="260.0" r="7" fill="#7e4f26"/>
+					<text class="ink" x="214.0" y="252.0" text-anchor="end" font-size="16" font-style="italic"><tspan>π</tspan><tspan font-size="11" dy="-7">−</tspan></text>
+					<text class="quiet" x="214.0" y="272.0" text-anchor="end" font-size="12">(−1 −1)</text>
+					<circle cx="305.0" cy="389.9" r="7" fill="#7e4f26"/>
+					<text class="ink" x="289.0" y="419.9" text-anchor="end" font-size="16" font-style="italic"><tspan>K</tspan><tspan font-size="11" dy="-7">−</tspan></text>
+					<text class="quiet" x="289.0" y="436.9" text-anchor="end" font-size="12">(1 −2)</text>
+					<circle cx="455.0" cy="389.9" r="7" fill="#7e4f26"/>
+					<text class="ink" x="471.0" y="419.9" text-anchor="start" font-size="16" font-style="italic"><tspan text-decoration="overline">K</tspan><tspan font-size="11" dy="-7">0</tspan></text>
+					<text class="quiet" x="471.0" y="436.9" text-anchor="start" font-size="12">(2 −1)</text>
+					<circle cx="380" cy="260" r="7" fill="#7e4f26"/><circle cx="380" cy="260" r="13" fill="none" stroke="#7e4f26" stroke-width="2"/>
+					<text class="ink" x="400" y="244" font-size="15" font-style="italic">π<tspan font-size="11" dy="-6">0</tspan><tspan dy="6">, η</tspan><tspan font-size="11" dy="4">8</tspan></text>
+					<text class="quiet" x="400" y="286" font-size="12">(0 0) ×2</text>
+					<text class="quiet" x="24" y="468" font-size="12">The double circle marks multiplicity 2; the singlet η₁, also of weight (0 0), is not part of the octet.</text>
+					</svg>
+					<figcaption>Weight system computed with WBase V3.0 (command T, A2, highest weight 1 1).</figcaption>
+				</figure>
+				<p>Unlike the decuplet, here the zero weight has multiplicity 2. The three pairs \(u\bar{u}\), \(d\bar{d}\) and \(s\bar{s}\) all have weight (0 0): two of their combinations belong to the octet (\(\pi^0\) and \(\eta_8\)), the third, symmetric one is the singlet \(\eta_1\). This accounts for the 9 = 8 + 1 states of the product. The observed mesons \(\eta\) and \(\eta'\) are mixtures of \(\eta_8\) and \(\eta_1\).</p>
 				<a href="#top" title="back to top">Back to top</a>
 			</div>
 
