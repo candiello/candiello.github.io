@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<title>WBase: come funziona e perché | Antonio Candiello</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Antonio Candiello"/>
+	<meta name="copyright" content="Testi e contenuti Antonio Candiello"/>
+	<meta name="description" content="WBase, il pacchetto C per le rappresentazioni irriducibili delle algebre di Lie semplici: l'approccio di Dynkin, il sistema dei pesi, le formule di Weyl e Freudenthal, i prodotti tensoriali e il codice."/>
+	<meta name="keywords" content="wbase, irrep, rappresentazioni irriducibili, Dynkin, algebre di Lie, base di Cartan-Weyl"/>
+	<link rel="alternate" hreflang="it" href="index.html" />
+	<link rel="alternate" hreflang="en" href="index-en.html" />
+	<link rel="stylesheet" type="text/css" href="../../css/screen.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/progetti.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+	<script src="../../js/sections.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+		onload="renderMathInElement(document.body, {delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+</head>
+<body>
+	<a name="top" id="top"></a>
+	<div id="page-wrap">
+
+		<!-- HEADER -->
+		<div id="header-wrap">
+			<div id="menu">
+				<ul>
+					<li><a href="../../index.html" title="home">Home</a></li>
+					<li><a href="../../index.html#articoli" title="pubblicazioni">Pubblicazioni</a></li>
+					<li><details><summary class="is-active" title="progetti">Progetti</summary>
+						<ul class="submenu">
+							<li><a class="is-current" href="index.html" title="WBase: come funziona e perché" aria-current="page">WBase</a></li>
+						</ul>
+					</details></li>
+					<li><a href="../../index.html#contatti" title="contatti">Contatti</a></li>
+				</ul>
+			</div>
+			<div id="logo-wrap"><h1>Antonio <br />Candiello</h1></div>
+			<div id="slogan">
+				<h4><b>Progetti</b> · WBase e le <b>rappresentazioni</b> delle <b>algebre di Lie</b></h4>
+			</div>
+			<div id="language">
+				<nav class="language-switch" aria-label="Lingua / Language">
+					<span class="is-current" title="Versione italiana" aria-current="page" lang="it">IT</span><a href="index-en.html" title="English version" hreflang="en" lang="en">EN</a>
+				</nav>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!-- FINE HEADER -->
+
+		<div id="content-wrap" class="post">
+
+			<!-- INTESTAZIONE ARTICOLO -->
+			<div class="content-box post-head">
+				<h2>WBase: come funziona e perché</h2>
+				<p class="byline">Antonio Candiello · 5 novembre 2026</p>
+				<ul class="keywords" aria-label="Parole chiave">
+					<li>wbase</li><li>irrep</li><li>rappresentazioni irriducibili</li><li>Dynkin</li><li>algebre di Lie</li><li>base di Cartan-Weyl</li>
+				</ul>
+				<p class="lead">WBase è un pacchetto C di meno di 1000 righe che calcola le <b>rappresentazioni irriducibili</b> (irrep) delle <b>algebre di Lie semplici</b> e decompone i loro prodotti tensoriali. Dato il peso massimo di un'irrep, ne calcola dimensione, indice, sistema dei pesi con le molteplicità e tableau di Young; dati due pesi massimi, trova le irrep contenute nel prodotto.</p>
+				<p>Il documento segue l'ordine in cui serve per capire WBase: prima la teoria, poi gli algoritmi, poi il codice. Gli esempi numerici sono rieseguiti con la V3.0, e dove il materiale originale del 1995 conteneva errori i valori sono corretti (<a href="#errori">elenco</a>).</p>
+				<nav class="toc" aria-label="Indice">
+					<h4>Indice</h4>
+					<ol>
+						<li><a href="#cose">Cos'è WBase</a></li>
+						<li><a href="#dynkin">L'approccio di Dynkin</a></li>
+						<li><a href="#esempio">L'irrep 15 di SU(3)</a></li>
+						<li><a href="#albero">Come si costruisce il sistema dei pesi</a></li>
+						<li><a href="#formule">Le formule</a></li>
+						<li><a href="#prodotti">Prodotti tensoriali</a></li>
+						<li><a href="#strutture">Le strutture dati</a></li>
+						<li><a href="#procedure">Le procedure e gli iteratori</a></li>
+						<li><a href="#f4">Due sessioni con F4</a></li>
+						<li><a href="#errori">Errori corretti</a></li>
+						<li><a href="#pubblicazioni">Pubblicazioni su WBase</a></li>
+					</ol>
+				</nav>
+			</div>
+
+			<div class="content-box">
+				<a id="cose"></a>
+				<h2>Cos'è WBase</h2>
+				<p>Il programma usa l'approccio di Dynkin, valido per tutte le algebre semplici, eccezionali comprese: A<sub>n</sub>, B<sub>n</sub>, C<sub>n</sub>, D<sub>n</sub>, E<sub>6</sub>, E<sub>7</sub>, E<sub>8</sub>, F<sub>4</sub> e G<sub>2</sub>. È nato per la fisica delle particelle e per la supergravità, dove servono prodotti di irrep più grandi di quelli riportati nelle tabelle classiche, come quella di Slansky.</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Versione</th><th>Data</th><th>Novità</th></tr>
+					<tr><td>V3.0</td><td>novembre 2026</td><td>Correzioni per C<sub>n</sub>, B<sub>2</sub>, E<sub>7</sub> ed E<sub>8</sub>, dimensioni a 64 bit, input robusto</td></tr>
+					<tr><td>V2.0</td><td>aprile 1995</td><td>Tutte le algebre semplici, generazione di tabelle (<code>wsequence</code>), tableau di Young estesi</td></tr>
+					<tr><td>V1</td><td>dicembre 1993</td><td>Prima versione, solo A<sub>n</sub>, B<sub>n</sub> e D<sub>n</sub>; pubblicata su Comput. Phys. Comm. 81 (1994)</td></tr>
+				</table></div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="dynkin"></a>
+				<h2>L'approccio di Dynkin</h2>
+				<p>Nell'approccio di Dynkin un'algebra di Lie semplice è descritta interamente dalla sua <b>matrice di Cartan</b>, una matrice \(l \times l\) dove \(l\) è il rango. WBase non contiene tabelle di algebre: costruisce tutto al volo a partire da questa matrice.</p>
+				<p>Nella <b>base di Cartan–Weyl</b> i generatori si dividono in \(l\) generatori \(H_i\) che commutano fra loro e nei restanti generatori \(E_\alpha\):</p>
+				<div class="formula">\[ [H_i, H_j] = 0, \qquad [H_i, E_\alpha] = \alpha_i \, E_\alpha, \qquad i = 1, \ldots, l \]</div>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Termine</th><th>Significato</th><th>In WBase</th></tr>
+					<tr><td>Rango \(l\)</td><td>Numero di generatori \(H_i\) che commutano</td><td><code>wsize</code></td></tr>
+					<tr><td>Radici \(\alpha\)</td><td>Gli autovalori (\(l\)-vettori) dei generatori \(E_\alpha\)</td><td>—</td></tr>
+					<tr><td>Radici semplici \(\alpha_1 \ldots \alpha_l\)</td><td>\(l\) radici da cui tutte le altre si ottengono per combinazione lineare a coefficienti interi tutti \(\ge 0\) o tutti \(\le 0\)</td><td>righe di <code>cart</code></td></tr>
+					<tr><td>Radici positive</td><td>Le radici con coefficienti tutti \(\ge 0\); sono \((\dim G - l)/2\)</td><td><code>pos</code>, generate da <code>wptree</code></td></tr>
+					<tr><td>Matrice di Cartan \(A\)</td><td>\(A_{ij} = 2(\alpha_i, \alpha_j)/(\alpha_j, \alpha_j)\); la riga \(i\) sono le etichette di Dynkin di \(\alpha_i\)</td><td><code>cart</code>, scritta da <code>Afill</code>…<code>Gfill</code></td></tr>
+					<tr><td>Metrica \(G\)</td><td>\(G_{ij} = (\omega_i, \omega_j)\), prodotto scalare fra pesi fondamentali; è l'inversa della matrice di Cartan, simmetrizzata</td><td><code>metr</code></td></tr>
+					<tr><td>Peso</td><td>\(l\)-upla di interi che identifica uno stato dentro un'irrep</td><td><code>wvect</code></td></tr>
+					<tr><td>Peso massimo \(\Lambda\)</td><td>\(l\)-upla di interi <b>non negativi</b> (etichette di Dynkin) che identifica un'irrep in modo univoco</td><td>i numeri che si digitano in input</td></tr>
+					<tr><td>Sistema dei pesi</td><td>Tutti i pesi di un'irrep, ciascuno con la sua molteplicità</td><td>lista di <code>wblock</code></td></tr>
+				</table></div>
+				<p>Il prodotto scalare fra due pesi \(x\) e \(y\), scritti nella base di Dynkin, è \((x, y) = \sum_{ij} x_i G_{ij} y_j\). Il vettore speciale \(\delta = (1, 1, \ldots, 1)\), cioè la semisomma delle radici positive, compare in tutte le formule.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="esempio"></a>
+				<h2>Un esempio: l'irrep 15 di SU(3)</h2>
+				<p>L'irrep 15 di SU(3) (algebra A<sub>2</sub>) ha peso massimo \(\Lambda = (1\ 2)\) e un sistema di 12 pesi distinti su 7 livelli. Tre pesi hanno molteplicità 2, quindi 12 + 3 = 15 stati.</p>
+				<p>Il <b>livello</b> di un peso è il numero di radici semplici sottratte da \(\Lambda\) per arrivarci; l'<b>altezza</b> dell'irrep è il livello più basso, qui 6. Questa è la tabella prodotta da WBase con il comando <code>T</code>:</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Livello</th><th>Peso</th><th>Molteplicità</th></tr>
+					<tr><td>0</td><td class="num">(1 2)</td><td>1</td></tr>
+					<tr><td>1</td><td class="num">(−1 3)</td><td>1</td></tr>
+					<tr><td>1</td><td class="num">(2 0)</td><td>1</td></tr>
+					<tr class="twice"><td>2</td><td class="num">(0 1)</td><td>2</td></tr>
+					<tr><td>2</td><td class="num">(3 −2)</td><td>1</td></tr>
+					<tr><td>3</td><td class="num">(−2 2)</td><td>1</td></tr>
+					<tr class="twice"><td>3</td><td class="num">(1 −1)</td><td>2</td></tr>
+					<tr><td>4</td><td class="num">(2 −3)</td><td>1</td></tr>
+					<tr class="twice"><td>4</td><td class="num">(−1 0)</td><td>2</td></tr>
+					<tr><td>5</td><td class="num">(0 −2)</td><td>1</td></tr>
+					<tr><td>5</td><td class="num">(−3 1)</td><td>1</td></tr>
+					<tr><td>6</td><td class="num">(−2 −1)</td><td>1</td></tr>
+				</table></div>
+				<p>Il sistema è simmetrico: il peso più basso (−2 −1) è l'opposto del peso massimo della coniugata \(\overline{15} = (2\ 1)\). Il materiale originale del 1995 riportava come ultimo peso (−2 1), che è un refuso.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="albero"></a>
+				<h2>Come si costruisce il sistema dei pesi</h2>
+				<p>Il sistema dei pesi si ottiene dal peso massimo sottraendo ripetutamente le radici semplici, cioè le righe della matrice di Cartan. In A<sub>2</sub> le radici semplici sono \(\alpha_1 = (2\ {-1})\) e \(\alpha_2 = ({-1}\ 2)\). La funzione ricorsiva <code>wtree</code> applica questa regola:</p>
+				<ol>
+					<li>Si parte da \(u = \Lambda\).</li>
+					<li>Per ogni componente \(i\) con \(u_i &gt; 0\), si sottrae \(\alpha_i\) una, due, …, \(u_i\) volte, ottenendo i pesi \(u - k\alpha_i\).</li>
+					<li>Ogni peso nuovo viene salvato al livello del padre più \(k\) e la procedura riparte da lì; un peso già presente non viene rielaborato.</li>
+				</ol>
+				<p>La regola si ferma da sola: le componenti negative non generano sottrazioni, quindi la ricorsione termina sul peso più basso. I pesi vengono tenuti ordinati per livello, perché la formula di Freudenthal ha bisogno di calcolare prima i livelli alti.</p>
+				<figure>
+					<p class="fig-title">Ogni passo verso il basso sottrae una radice semplice</p>
+					<p class="fig-sub">Irrep 15 di SU(3), peso massimo (1 2): 12 pesi su 7 livelli, 3 con molteplicità 2</p>
+					<svg class="fig" viewBox="0 76 760 420" role="img" aria-label="Ogni passo verso il basso sottrae una radice semplice" font-size="13">
+					<defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7e4f26"/></marker><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3f7480"/></marker></defs>
+					<path class="a1" d="M312 114L218 137" marker-end="url(#ar1)"/>
+					<path class="a1" d="M442 166L348 189" marker-end="url(#ar1)"/>
+					<path class="a1" d="M312 218L218 241" marker-end="url(#ar1)"/>
+					<path class="a1" d="M572 218L478 241" marker-end="url(#ar1)"/>
+					<path class="a1" d="M442 270L348 293" marker-end="url(#ar1)"/>
+					<path class="a1" d="M572 322L478 345" marker-end="url(#ar1)"/>
+					<path class="a1" d="M312 322L218 345" marker-end="url(#ar1)"/>
+					<path class="a1" d="M442 374L348 397" marker-end="url(#ar1)"/>
+					<path class="a2" d="M348 114L442 137" marker-end="url(#ar2)"/>
+					<path class="a2" d="M218 166L312 189" marker-end="url(#ar2)"/>
+					<path class="a2" d="M478 166L572 189" marker-end="url(#ar2)"/>
+					<path class="a2" d="M348 218L442 241" marker-end="url(#ar2)"/>
+					<path class="a2" d="M218 270L312 293" marker-end="url(#ar2)"/>
+					<path class="a2" d="M478 270L572 293" marker-end="url(#ar2)"/>
+					<path class="a2" d="M348 322L442 345" marker-end="url(#ar2)"/>
+					<path class="a2" d="M218 374L312 397" marker-end="url(#ar2)"/>
+					<text class="quiet" x="24" y="104" font-size="11.5">livello 0</text>
+					<text class="quiet" x="24" y="156" font-size="11.5">livello 1</text>
+					<text class="quiet" x="24" y="208" font-size="11.5">livello 2</text>
+					<text class="quiet" x="24" y="260" font-size="11.5">livello 3</text>
+					<text class="quiet" x="24" y="312" font-size="11.5">livello 4</text>
+					<text class="quiet" x="24" y="364" font-size="11.5">livello 5</text>
+					<text class="quiet" x="24" y="416" font-size="11.5">livello 6</text>
+					<rect class="box" x="288" y="86" width="84" height="28" rx="8"/>
+					<text class="ink" x="330" y="104" text-anchor="middle" font-weight="bold">(1 2)</text>
+					<rect class="box" x="158" y="138" width="84" height="28" rx="8"/>
+					<text class="ink" x="200" y="156" text-anchor="middle">(−1 3)</text>
+					<rect class="box" x="418" y="138" width="84" height="28" rx="8"/>
+					<text class="ink" x="460" y="156" text-anchor="middle">(2 0)</text>
+					<rect class="box twice" x="288" y="190" width="84" height="28" rx="8"/>
+					<text class="ink" x="330" y="208" text-anchor="middle">(0 1)</text>
+					<text class="ink" x="378" y="208" font-size="11.5" font-weight="bold">×2</text>
+					<rect class="box" x="548" y="190" width="84" height="28" rx="8"/>
+					<text class="ink" x="590" y="208" text-anchor="middle">(3 −2)</text>
+					<rect class="box" x="158" y="242" width="84" height="28" rx="8"/>
+					<text class="ink" x="200" y="260" text-anchor="middle">(−2 2)</text>
+					<rect class="box twice" x="418" y="242" width="84" height="28" rx="8"/>
+					<text class="ink" x="460" y="260" text-anchor="middle">(1 −1)</text>
+					<text class="ink" x="508" y="260" font-size="11.5" font-weight="bold">×2</text>
+					<rect class="box" x="548" y="294" width="84" height="28" rx="8"/>
+					<text class="ink" x="590" y="312" text-anchor="middle">(2 −3)</text>
+					<rect class="box twice" x="288" y="294" width="84" height="28" rx="8"/>
+					<text class="ink" x="330" y="312" text-anchor="middle">(−1 0)</text>
+					<text class="ink" x="378" y="312" font-size="11.5" font-weight="bold">×2</text>
+					<rect class="box" x="418" y="346" width="84" height="28" rx="8"/>
+					<text class="ink" x="460" y="364" text-anchor="middle">(0 −2)</text>
+					<rect class="box" x="158" y="346" width="84" height="28" rx="8"/>
+					<text class="ink" x="200" y="364" text-anchor="middle">(−3 1)</text>
+					<rect class="box" x="288" y="398" width="84" height="28" rx="8"/>
+					<text class="ink" x="330" y="416" text-anchor="middle">(−2 −1)</text>
+					<line class="a1" x1="170" y1="466" x2="206" y2="466" marker-end="url(#ar1)"/><text class="ink" x="214" y="470" font-size="11.5">sottrae α₁ = (2 −1)</text>
+					<line class="a2" x1="370" y1="466" x2="406" y2="466" marker-end="url(#ar2)"/><text class="ink" x="414" y="470" font-size="11.5">sottrae α₂ = (−1 2)</text>
+					<rect class="box twice" x="575" y="457" width="22" height="18" rx="4"/><text class="ink" x="605" y="470" font-size="11.5">molteplicità 2</text>
+					</svg>
+					<figcaption>Albero dei pesi generato con WBase V3.0 (comando T).</figcaption>
+				</figure>
+				<p>Nel diagramma ogni freccia verso sinistra (continua) sottrae \(\alpha_1\) e ogni freccia verso destra (tratteggiata) sottrae \(\alpha_2\). L'albero dice quali pesi esistono, non quante volte compaiono: (0 −2) ha due frecce entranti come (−1 0), ma molteplicità 1 invece di 2. Per le molteplicità serve la formula di Freudenthal.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="formule"></a>
+				<h2>Le formule</h2>
+				<p>WBase usa tre formule classiche, tutte scritte con il prodotto scalare della metrica \(G\), più la formula dell'altezza. Ogni formula corrisponde a una funzione del codice.</p>
+				<h3>Dimensione: formula di Weyl</h3>
+				<p>Funzione <code>weyl</code>. Il prodotto corre sulle radici positive \(\alpha\):</p>
+				<div class="formula">\[ \dim(\Lambda) = \prod_{\alpha > 0} \frac{(\Lambda + \delta, \alpha)}{(\delta, \alpha)} \]</div>
+				<p>Non serve costruire il sistema dei pesi: bastano il peso massimo e le radici positive. Per questo la dimensione di un'irrep enorme di E<sub>8</sub> si calcola istantaneamente.</p>
+				<h3>Molteplicità di un peso: formula ricorsiva di Freudenthal</h3>
+				<p>Funzioni <code>freud</code> e <code>bfreud</code>. Si parte da \(\deg(\Lambda) = 1\) e si scende livello per livello:</p>
+				<div class="formula">\[ \deg(w) = \frac{2 \sum_{\alpha > 0} \sum_{k > 0} \deg(w + k\alpha)\,(w + k\alpha, \alpha)}{\lVert \Lambda + \delta \rVert^2 - \lVert w + \delta \rVert^2} \]</div>
+				<p>I pesi \(w + k\alpha\) stanno più in alto di \(w\), quindi le loro molteplicità sono già note quando si arriva a \(w\). È la parte più lenta del programma: ogni \(\deg(w + k\alpha)\) richiede una ricerca nella lista dei pesi.</p>
+				<h3>Indice di Dynkin del 2° ordine</h3>
+				<p>Funzione <code>casimir</code>, stampato come <code>C=</code>:</p>
+				<div class="formula">\[ C(\Lambda) = \frac{\dim(\Lambda)}{\dim(G)} \, (\Lambda, \Lambda + 2\delta) \]</div>
+				<p>Con questa normalizzazione la fondamentale di SU(N) ha C = 1 e l'aggiunta di SU(3) ha C = 6. Il materiale originale del 1995 scrive solo \(\dim(\Lambda)/\dim(G)\), dimenticando il fattore \((\Lambda, \Lambda + 2\delta)\): il codice invece lo ha sempre usato.</p>
+				<h3>Altezza</h3>
+				<p>Funzione <code>wheight</code>, stampata come <code>H=</code>: \(H = \sum_i \mathrm{whigh}_i \Lambda_i\), dove i coefficienti <code>whigh</code> sono fissati per ogni algebra. H è il livello del peso più basso, cioè il numero di livelli del sistema dei pesi meno 1.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="prodotti"></a>
+				<h2>Prodotti tensoriali</h2>
+				<p>Per decomporre \(R_1 \otimes R_2\) WBase somma ogni peso di \(R_1\) con ogni peso di \(R_2\) e poi estrae le irrep una alla volta, partendo dalla più alta. È la funzione <code>wpdisp</code>, in questi passi:</p>
+				<ol>
+					<li><code>wsyst</code> costruisce il sistema dei pesi di \(R_1\) e quello di \(R_2\), con le molteplicità.</li>
+					<li><code>bprod</code> forma l'insieme di tutte le somme \(w_1 + w_2\), contando le molteplicità (\(\dim R_1 \times \dim R_2\) elementi).</li>
+					<li>Finché l'insieme non è vuoto:
+						<ol>
+							<li><code>whigher</code> sceglie il peso di altezza massima: è il peso massimo di una componente;</li>
+							<li><code>wsyst</code> costruisce il sistema dei pesi di quella componente;</li>
+							<li><code>bremove</code> lo sottrae dall'insieme, molteplicità comprese.</li>
+						</ol>
+					</li>
+				</ol>
+				<p>La modalità veloce (comandi <code>F</code> e <code>L</code>) salta il passo 3. Elenca solo i pesi dominanti distinti del prodotto, quindi non dà le molteplicità e può includere pesi che non sono pesi massimi di nessuna componente.</p>
+				<h3>Un esempio fisico: il decupletto barionico</h3>
+				<p>Tre quark formano un barione secondo il prodotto \(3 \otimes 3 \otimes 3 = 10 \oplus 8 \oplus 8 \oplus 1\) di SU(3) di sapore. WBase lo calcola in due passi: \(3 \otimes 3 = 6 \oplus \overline{3}\), poi \(6 \otimes 3 = 10 \oplus 8\) e \(\overline{3} \otimes 3 = 8 \oplus 1\).</p>
+				<p>Il decupletto dei barioni di spin 3/2 è l'irrep 10 = (0 3), in cui i tre quark sono simmetrizzati. Con la convenzione usata da WBase, u = (0 1), d = (−1 0) e s = (1 −1), il peso di ogni stato è la somma dei pesi dei suoi quark:</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Livello</th><th>Stato</th><th>Quark</th><th>Peso</th></tr>
+					<tr><td>0</td><td>Δ</td><td>uuu</td><td class="num">(0 3)</td></tr>
+					<tr><td>1</td><td>Σ*</td><td>uus</td><td class="num">(1 1)</td></tr>
+					<tr><td>2</td><td>Δ</td><td>duu</td><td class="num">(−1 2)</td></tr>
+					<tr><td>2</td><td>Ξ*</td><td>uss</td><td class="num">(2 −1)</td></tr>
+					<tr><td>3</td><td>Σ*</td><td>dus</td><td class="num">(0 0)</td></tr>
+					<tr><td>3</td><td>Ω</td><td>sss</td><td class="num">(3 −3)</td></tr>
+					<tr><td>4</td><td>Δ</td><td>ddu</td><td class="num">(−2 1)</td></tr>
+					<tr><td>4</td><td>Ξ*</td><td>dss</td><td class="num">(1 −2)</td></tr>
+					<tr><td>5</td><td>Σ*</td><td>dds</td><td class="num">(−1 −1)</td></tr>
+					<tr><td>6</td><td>Δ</td><td>ddd</td><td class="num">(−3 0)</td></tr>
+				</table></div>
+				<p>Tutti i 10 pesi hanno molteplicità 1. Il materiale originale dava a dds il peso (1 −2), già assegnato a dss: il valore corretto è (−1 −1).</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="strutture"></a>
+				<h2>Le strutture dati</h2>
+				<p>WBase alloca tutta la memoria a run-time, perché la dimensione di un sistema dei pesi non è nota in anticipo: può andare da pochi byte a centinaia di megabyte. Ci sono tre tipi di dati, definiti in <code>wbase.h</code>:</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Tipo</th><th>Definizione</th><th>Uso</th></tr>
+					<tr><td><code>wvect</code></td><td><code>typedef char *wvect;</code></td><td>Un peso: un array di \(l\) byte allocato con <code>walloc</code> e liberato con <code>wfree</code></td></tr>
+					<tr><td><code>wplace</code></td><td><code>struct { tdeg deg; tlevel level; char vect[1]; }</code></td><td>Un peso dentro un sistema, con molteplicità (<code>unsigned short</code>) e livello (<code>short</code>). <code>vect[1]</code> è lo «struct hack» del C pre-1999: in realtà il vettore ha \(l\) byte</td></tr>
+					<tr><td><code>wblock</code></td><td><code>struct tblock { struct tblock *next; char body[1]; }</code></td><td>Un blocco di 1000 posti (<code>bsize</code>); i blocchi formano una lista concatenata</td></tr>
+				</table></div>
+				<figure>
+					<p class="fig-title">Un sistema dei pesi è una catena di blocchi di posti a dimensione fissa</p>
+					<svg class="fig" viewBox="0 50 760 410" role="img" aria-label="Un sistema dei pesi è una catena di blocchi di posti a dimensione fissa" font-size="13">
+					<defs><marker id="arm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b7763"/></marker></defs>
+					<text class="ink" x="32" y="68" font-weight="bold">Un posto (wplace), per un'algebra di rango l</text>
+					<rect class="box" x="32" y="80" width="120" height="40" rx="8"/><text class="ink" x="92" y="98" text-anchor="middle" font-weight="bold">deg</text><text class="quiet" x="92" y="113" text-anchor="middle" font-size="11.5">molteplicità, 2 byte</text>
+					<rect class="box" x="160" y="80" width="120" height="40" rx="8"/><text class="ink" x="220" y="98" text-anchor="middle" font-weight="bold">level</text><text class="quiet" x="220" y="113" text-anchor="middle" font-size="11.5">livello, 2 byte</text>
+					<rect class="accent" x="288" y="80" width="296" height="40" rx="8"/><text class="ink" x="436" y="98" text-anchor="middle" font-weight="bold">vect[0] … vect[l−1]</text><text class="quiet" x="436" y="113" text-anchor="middle" font-size="11.5">etichette di Dynkin del peso, 1 byte ciascuna</text>
+					<rect class="pad" x="592" y="80" width="136" height="40" rx="8"/><text class="quiet" x="660" y="98" text-anchor="middle">riempimento</text><text class="quiet" x="660" y="113" text-anchor="middle" font-size="11.5">fino a un multiplo di 4</text>
+					<text class="quiet" x="32" y="146" font-size="11.5">5 + l byte (4 per deg e level, 1 di allineamento, l per il peso), arrotondati a un multiplo di 4: 8 byte in A2, 16 in E8</text>
+					<text class="ink" x="32" y="212" font-weight="bold">La lista di blocchi (wblock), 1000 posti per blocco</text>
+					<rect class="box" x="32" y="232" width="200" height="144" rx="8"/>
+					<rect class="head" x="32" y="232" width="200" height="32" rx="8"/>
+					<line class="grid" x1="32" y1="292" x2="232" y2="292"/>
+					<line class="grid" x1="32" y1="320" x2="232" y2="320"/>
+					<line class="grid" x1="32" y1="348" x2="232" y2="348"/>
+					<rect class="box" x="280" y="232" width="200" height="144" rx="8"/>
+					<rect class="head" x="280" y="232" width="200" height="32" rx="8"/>
+					<line class="grid" x1="280" y1="292" x2="480" y2="292"/>
+					<line class="grid" x1="280" y1="320" x2="480" y2="320"/>
+					<line class="grid" x1="280" y1="348" x2="480" y2="348"/>
+					<rect class="box" x="528" y="232" width="200" height="144" rx="8"/>
+					<rect class="head" x="528" y="232" width="200" height="32" rx="8"/>
+					<line class="grid" x1="528" y1="292" x2="728" y2="292"/>
+					<line class="grid" x1="528" y1="320" x2="728" y2="320"/>
+					<line class="grid" x1="528" y1="348" x2="728" y2="348"/>
+					<rect class="endrow" x="529" y="320" width="198" height="28"/>
+					<text class="ink" x="132" y="253" text-anchor="middle" font-weight="bold">next</text>
+					<text class="ink" x="48" y="282">posto 0: peso massimo</text>
+					<text class="ink" x="48" y="310">posto 1</text>
+					<text class="quiet" x="48" y="338">…</text>
+					<text class="ink" x="48" y="366">posto 999</text>
+					<text class="ink" x="380" y="253" text-anchor="middle" font-weight="bold">next</text>
+					<text class="ink" x="296" y="282">posto 1000</text>
+					<text class="ink" x="296" y="310">posto 1001</text>
+					<text class="quiet" x="296" y="338">…</text>
+					<text class="ink" x="296" y="366">posto 1999</text>
+					<text class="ink" x="628" y="253" text-anchor="middle" font-weight="bold">next = NULL</text>
+					<text class="ink" x="544" y="282">posto 2000</text>
+					<text class="ink" x="544" y="310">… ultimo peso</text>
+					<text class="ink" x="544" y="338" font-weight="bold">deg = 0: fine lista</text>
+					<text class="quiet" x="544" y="366">posti liberi</text>
+					<path class="link" d="M232 248H280" marker-end="url(#arm)"/>
+					<path class="link" d="M480 248H528" marker-end="url(#arm)"/>
+					<text class="quiet" x="32" y="424" font-size="11.5">pstart / pnext scorrono i posti attraversando i blocchi e si fermano al primo deg = 0;</text>
+					<text class="quiet" x="32" y="442" font-size="11.5">wsave aggiunge un blocco con balloc quando l'ultimo è pieno, bsfree libera tutta la catena.</text>
+					</svg>
+					<figcaption>Strutture dati di wbase.h: wvect, wplace, wblock.</figcaption>
+				</figure>
+				<p>I blocchi sono «informi»: <code>body</code> è solo una sequenza di byte, a cui la macro <code>place(i, b)</code> dà la forma di un <code>wplace</code>. Usare <code>char</code> per le etichette risparmia memoria ma le limita all'intervallo da −128 a 127.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="procedure"></a>
+				<h2>Le procedure e gli iteratori</h2>
+				<p>L'utente di WBase lavora con poche procedure di alto livello e tre iteratori, senza mai toccare i blocchi di memoria. Le firme qui sotto sono quelle del codice V3.0.</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Procedure</th><th>Cosa fanno</th></tr>
+					<tr><td><code>wstartup(type, rank, debug)</code><br /><code>wcleanup(msg)</code></td><td>Creano e distruggono le tabelle dell'algebra (Cartan, metrica, radici positive). <code>wcleanup(NULL)</code> chiude senza messaggio e termina il programma</td></tr>
+					<tr><td><code>wread(hw)</code><br /><code>wfdisp(hw)</code><br /><code>wydisp(hw)</code></td><td>Leggono un peso massimo da stdin; stampano D, C, H; stampano il tableau di Young (serie classiche)</td></tr>
+					<tr><td><code>wsave(w, base, level)</code><br /><code>wremove(w, base)</code></td><td>Con level ≥ 0 inseriscono w ordinato per livello; con level = −1 lo accodano o ne incrementano la molteplicità. <code>wremove</code> decrementa la molteplicità e toglie il peso quando arriva a 0</td></tr>
+					<tr><td><code>wsyst(hw)</code><br /><code>bdisp(base)</code><br /><code>bsfree(base)</code></td><td>Costruiscono il sistema dei pesi con le molteplicità; lo stampano; liberano la lista di blocchi</td></tr>
+					<tr><td><code>wpdisp(hw1, hw2, mod)</code></td><td>Decompone hw1 ⊗ hw2; <code>mod</code> combina i flag <code>WFULL</code> (esatto), <code>WTREE</code> (albero dei pesi), <code>WYOUNG</code> (tableau)</td></tr>
+				</table></div>
+				<h3>Scorrere un sistema dei pesi</h3>
+				<p><code>pstart</code>/<code>pnext</code> nascondono il passaggio da un blocco all'altro:</p>
+<pre><code>wplace *p; pcurr pc;
+for (p = pstart(base, &amp;pc); p != NULL; p = pnext(&amp;pc))
+    wdisp(p-&gt;vect);   <span class="cm">/* anche p-&gt;deg e p-&gt;level */</span></code></pre>
+				<h3>Estrarre le irrep di un prodotto</h3>
+				<p><code>wpstart</code>/<code>wpnext</code> restituiscono a ogni passo il sistema dei pesi completo di una componente:</p>
+<pre><code>wblock *b1 = wsyst(hw1), *b2 = wsyst(hw2), *buf, *b;
+buf = bprod(b1, b2);
+bsfree(b1); bsfree(b2);
+for (b = wpstart(buf); b != NULL; b = wpnext(b, buf))
+    bdisp(b);</code></pre>
+				<h3>Generare una tabella di irrep</h3>
+				<p><code>wsequence</code> restituisce a ogni chiamata la prossima irrep in ordine di dimensione, fino a quelle con dimensione strettamente minore di <code>maxdim</code>, e alla fine libera da sola la propria lista:</p>
+<pre><code>wblock *b = NULL; long long dim;
+wvect hw = walloc();
+while ((b = wsequence(hw, b, maxdim, &amp;dim)) != NULL)
+    wfdisp(hw);
+wfree(hw);</code></pre>
+				<p>Due <code>wsequence</code> annidati producono una tabella di prodotti: è quello che fanno i comandi <code>U</code>, <code>V</code> e <code>L</code>. Per avere risultati esatti bisogna passare <code>WFULL</code> a <code>wpdisp</code>; con <code>mod = 0</code> la decomposizione è quella veloce e approssimata.</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="f4"></a>
+				<h2>Due sessioni con F<sub>4</sub></h2>
+				<p>Due sessioni con l'algebra eccezionale F<sub>4</sub> mostrano WBase al lavoro. La V3.0 riproduce esattamente i numeri delle sessioni originali del 1995. Si avvia <code>wbase.exe</code>, si scrive <code>F4</code> come algebra, poi un comando.</p>
+				<h3>Sequenza di irrep (comando <code>S</code>, maxdim 2000)</h3>
+				<p>WBase elenca in ordine di dimensione tutte le irrep con dimensione minore di 2000:</p>
+				<figure>
+					<p class="fig-title">Sotto dimensione 2000 F<sub>4</sub> ha 8 irrep, due delle quali di dimensione 1053</p>
+					<p class="fig-sub">In ordine di dimensione; in scuro le due irrep diverse con la stessa dimensione</p>
+					<svg class="fig" viewBox="0 66 760 306" role="img" aria-label="Sotto dimensione 2000 F4 ha 8 irrep, due delle quali di dimensione 1053" font-size="13">
+					<text class="quiet" x="24" y="86" font-size="11.5">peso massimo</text>
+					<text class="quiet" x="150" y="86" font-size="11.5">dimensione</text>
+					<text class="ink" x="24" y="112">(0 0 0 0)</text>
+					<rect class="bar" x="150" y="97" width="2.0" height="22" rx="3"><title>(0 0 0 0): dimensione 1, indice 0, altezza 0</title></rect>
+					<text class="ink" x="160.0" y="112">1</text>
+					<text class="ink" x="24" y="146">(0 0 0 1)</text>
+					<rect class="bar" x="150" y="131" width="10.2" height="22" rx="3"><title>(0 0 0 1): dimensione 26, indice 6, altezza 16</title></rect>
+					<text class="ink" x="168.2" y="146">26</text>
+					<text class="ink" x="24" y="180">(1 0 0 0)</text>
+					<rect class="bar" x="150" y="165" width="20.4" height="22" rx="3"><title>(1 0 0 0): dimensione 52, indice 18, altezza 22</title></rect>
+					<text class="ink" x="178.4" y="180">52</text>
+					<text class="ink" x="24" y="214">(0 0 1 0)</text>
+					<rect class="bar" x="150" y="199" width="107.1" height="22" rx="3"><title>(0 0 1 0): dimensione 273, indice 126, altezza 30</title></rect>
+					<text class="ink" x="265.1" y="214">273</text>
+					<text class="ink" x="24" y="248">(0 0 0 2)</text>
+					<rect class="bar" x="150" y="233" width="127.2" height="22" rx="3"><title>(0 0 0 2): dimensione 324, indice 162, altezza 32</title></rect>
+					<text class="ink" x="285.2" y="248">324</text>
+					<text class="ink" x="24" y="282">(1 0 0 1)</text>
+					<rect class="bar twin" x="150" y="267" width="413.3" height="22" rx="3"><title>(1 0 0 1): dimensione 1053, indice 648, altezza 38</title></rect>
+					<text class="ink" x="571.3" y="282" font-weight="bold">1.053</text>
+					<text class="quiet" x="621.3" y="282" font-size="11.5">C = 648, H = 38</text>
+					<text class="ink" x="24" y="316">(2 0 0 0)</text>
+					<rect class="bar twin" x="150" y="301" width="413.3" height="22" rx="3"><title>(2 0 0 0): dimensione 1053, indice 810, altezza 44</title></rect>
+					<text class="ink" x="571.3" y="316" font-weight="bold">1.053</text>
+					<text class="quiet" x="621.3" y="316" font-size="11.5">C = 810, H = 44</text>
+					<text class="ink" x="24" y="350">(0 1 0 0)</text>
+					<rect class="bar" x="150" y="335" width="500.0" height="22" rx="3"><title>(0 1 0 0): dimensione 1274, indice 882, altezza 42</title></rect>
+					<text class="ink" x="658.0" y="350">1.274</text>
+					</svg>
+					<figcaption>WBase V3.0, F4, comando S con maxdim 2000; identico alla sessione originale del 1995.</figcaption>
+				</figure>
+				<p>Le due irrep di dimensione 1053 si distinguono per l'indice C (648 e 810) e per l'altezza H (38 e 44): la sola dimensione non basta a identificare un'irrep.</p>
+				<h3>Sequenza di prodotti (comando <code>U</code>, maxdim 100)</h3>
+				<p>Con maxdim 100 le irrep coinvolte sono la 26 e la 52, e WBase decompone tutti i loro prodotti:</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Prodotto</th><th>Decomposizione</th></tr>
+					<tr><td class="num">26 ⊗ 26</td><td>324 ⊕ 273 ⊕ 52 ⊕ 26 ⊕ 1</td></tr>
+					<tr><td class="num">26 ⊗ 52</td><td>1053 ⊕ 273 ⊕ 26</td></tr>
+					<tr><td class="num">52 ⊗ 52</td><td>1053′ ⊕ 1274 ⊕ 324 ⊕ 52 ⊕ 1</td></tr>
+				</table></div>
+				<p>In ogni riga la somma delle dimensioni è il prodotto delle dimensioni, per esempio 26 × 52 = 1352 = 1053 + 273 + 26. Qui 1053 è (1 0 0 1) e 1053′ è (2 0 0 0).</p>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="errori"></a>
+				<h2>Errori corretti</h2>
+				<p>Rispetto al materiale originale del 1995, questo documento corregge 9 punti. Ogni correzione è verificata eseguendo WBase V3.0 o confrontando con il codice.</p>
+				<div class="table-wrap"><table class="data">
+					<tr><th>Argomento</th><th>Nell'originale</th><th>Corretto</th></tr>
+					<tr><td>Irrep 15 di SU(3)</td><td>Ultimo peso: (−2 1)</td><td>(−2 −1)</td></tr>
+					<tr><td>Decupletto barionico</td><td>Peso di dds: (1 −2), uguale a quello di dss</td><td>(−1 −1)</td></tr>
+					<tr><td>Indice di Dynkin</td><td>\(\mathrm{cas}(\Lambda) = \dim(\Lambda)/\dim(\mathrm{adj})\)</td><td>\(C(\Lambda) = \dim(\Lambda)\,(\Lambda, \Lambda + 2\delta)/\dim(G)\)</td></tr>
+					<tr><td>Peso massimo</td><td>\(l\)-upla di interi «positivi»</td><td>Interi non negativi: lo zero è ammesso, (0 0) è il singoletto</td></tr>
+					<tr><td><code>wstartup</code></td><td><code>wstartup(type, rank)</code></td><td><code>wstartup(type, rank, debug)</code></td></tr>
+					<tr><td><code>wcleanup</code></td><td>Va chiamata dopo ogni <code>wstartup</code></td><td>Termina anche il programma (<code>exit</code>)</td></tr>
+					<tr><td><code>wsequence</code></td><td>Esempio con <code>int dim</code></td><td><code>long long dim</code> (nella V2.0 era <code>long</code>)</td></tr>
+					<tr><td><code>wsequence</code></td><td>Mostra le irrep «fino a» maxdim</td><td>Strettamente minori di maxdim</td></tr>
+					<tr><td>Sessione F<sub>4</sub> dei prodotti</td><td>Sembra fatta con la modalità veloce <code>L</code></td><td>L'output coincide con la modalità esatta <code>U</code></td></tr>
+				</table></div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="pubblicazioni"></a>
+				<h2>Pubblicazioni su WBase</h2>
+				<p>WBase è descritto in tre pubblicazioni di A. Candiello, dal 1994 al 1995:</p>
+				<ul class="refs">
+					<li>A. Candiello, <em><a href="../../docs/9504058v2.pdf">WBase: a C package to reduce tensor products of Lie algebra representations. Description and new developments</a></em>, in <em>New Computing Techniques in Physics Research IV</em>, atti del 4° International Workshop on Software Engineering, Artificial Intelligence and Expert Systems for High Energy and Nuclear Physics, a cura di B. Denby e D. Perret-Gallix, World Scientific, 1995: descrive la V2.0.</li>
+					<li>A. Candiello, <em><a href="https://doi.org/10.1016/0010-4655(94)90059-0">Reply on the comment on «WBase: a C package to reduce tensor products of Lie algebra representations»</a></em>, Comput. Phys. Comm. 83 (1994) 334: risposta al <a href="https://doi.org/10.1016/0010-4655(94)90058-2">commento di B.G. Wybourne</a>.</li>
+					<li>A. Candiello, <em><a href="https://doi.org/10.1016/0010-4655(94)90123-6">WBase: a C package to reduce tensor products of Lie algebra representations</a></em>, Comput. Phys. Comm. 81 (1994) 248–260: articolo sulla V1, preprint DFPD/93/TH/76 (<a href="../../docs/9401082.pdf">PDF</a>).</li>
+				</ul>
+				<p><b>Riferimenti teorici</b> citati negli articoli:</p>
+				<ul class="refs">
+					<li>R. Slansky, <em>Group theory for unified model building</em>, Phys. Rep. 79 (1981) 1: la fonte delle formule e delle convenzioni.</li>
+					<li>R.N. Cahn, <em>Semi-Simple Lie Algebras and Their Representations</em>, Benjamin/Cummings, 1984.</li>
+					<li>W. McKay, J. Patera, <em>Tables of Dimensions, Indices and Branching Rules for Representations of Simple Algebras</em>, Dekker, 1981.</li>
+					<li>G.R.E. Black, R.C. King, B.G. Wybourne, J. Phys. A16 (1983) 1555: le tecniche a S-function, l'alternativa ai metodi di Dynkin.</li>
+				</ul>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+		</div>
+
+		<!-- FOOTER -->
+		<div id="footer-wrap">
+			<p>Antonio Candiello | Profilo professionale, pubblicazioni e attività</p>
+		</div>
+		<!-- FINE FOOTER -->
+	</div>
+</body>
+</html>

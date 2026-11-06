@@ -65,6 +65,14 @@
 		if (target) target.scrollIntoView();
 	}
 
+	// Menu a tendina (Progetti): un click fuori dalla voce aperta la richiude.
+	document.addEventListener('click', function (event) {
+		var open = document.querySelectorAll('#menu details[open]');
+		for (var i = 0; i < open.length; i++) {
+			if (!open[i].contains(event.target)) open[i].removeAttribute('open');
+		}
+	});
+
 	document.addEventListener('DOMContentLoaded', openFromHash);
 	window.addEventListener('hashchange', function () {
 		// Se la sezione è già aperta (es. dal click), non chiudere quelle aperte insieme.

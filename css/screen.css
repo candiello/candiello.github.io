@@ -160,7 +160,8 @@ img{
 	margin:0;
 }
 
-#menu a{
+#menu a,
+#menu summary{
 	display:inline-flex;
 	align-items:center;
 	padding:0.7rem 1rem;
@@ -175,7 +176,8 @@ img{
 	box-shadow:var(--shadow-soft);
 }
 
-#menu a:hover{
+#menu a:hover,
+#menu summary:hover{
 	background:rgba(244,229,207,0.92);
 	transform:translateY(-1px);
 }
@@ -184,6 +186,47 @@ img{
 	background:var(--stone-900);
 	border-color:var(--stone-900);
 	color:#fff;
+}
+
+/* Voce di menu con sottovoci (Progetti): <details> si apre senza JavaScript */
+#menu summary{
+	cursor:pointer;
+	list-style:none;
+}
+
+#menu summary::-webkit-details-marker{
+	display:none;
+}
+
+#menu summary::after{
+	content:"\25BE";
+	margin-left:0.45rem;
+	font-size:0.85em;
+}
+
+#menu details[open] > summary,
+#menu summary.is-active{
+	background:var(--stone-900);
+	border-color:var(--stone-900);
+	color:#fff;
+}
+
+#menu .submenu{
+	display:flex;
+	flex-direction:column;
+	gap:8px;
+	margin:10px 0 0;
+	padding:0;
+}
+
+#menu .submenu a{
+	padding:0.55rem 0.9rem;
+	text-transform:none;
+	letter-spacing:0.02em;
+}
+
+#menu .submenu a.is-current{
+	background:var(--sand-100);
 }
 
 /* Sezioni a scomparsa (js/sections.js): senza JavaScript restano visibili */
