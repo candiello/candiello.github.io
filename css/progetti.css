@@ -211,6 +211,64 @@ table.data tr.twice td{
 	margin-bottom:0.7rem;
 }
 
+/* Grafici come immagini (pagina PA Digitale 2026) */
+.post figure img{
+	display:block;
+	width:100%;
+	height:auto;
+}
+
+/* Riquadri con un numero in evidenza */
+.stats{
+	display:grid;
+	grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
+	gap:14px;
+	margin:0 0 1.4rem;
+	padding:0;
+	list-style:none;
+}
+
+.stats li{
+	margin:0;
+	padding:16px 18px;
+	max-width:none;
+	border-radius:18px;
+	background:rgba(251,244,234,0.7);
+	border:1px solid rgba(126, 79, 38, 0.12);
+	font-size:0.95rem;
+	line-height:1.45;
+}
+
+.stats .tag{
+	display:block;
+	margin-bottom:4px;
+	font:600 0.78rem/1.3 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	letter-spacing:0.04em;
+	text-transform:uppercase;
+	color:var(--stone-500);
+}
+
+.stats .big{
+	display:block;
+	margin-bottom:4px;
+	font-size:1.7rem;
+	font-weight:bold;
+	line-height:1.15;
+	color:var(--sand-700);
+}
+
+.stats .na .big{
+	color:var(--stone-500);
+}
+
+.post table.data .fase td{
+	background:var(--sand-50);
+	font-weight:bold;
+}
+
+.post table.data .ok{ color:#2d6a3e; font-weight:bold; }
+.post table.data .ko{ color:#9a2b1f; font-weight:bold; }
+
 @media (max-width: 640px){
 	.toc ol{
 		columns:1;
