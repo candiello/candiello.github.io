@@ -269,6 +269,112 @@ table.data tr.twice td{
 .post table.data .ok{ color:#2d6a3e; font-weight:bold; }
 .post table.data .ko{ color:#9a2b1f; font-weight:bold; }
 
+/* Rimando a una pagina collegata, in fondo all'indice */
+.toc .toc-extra{
+	margin:0.4rem 0 0.6rem;
+	padding-top:0.6rem;
+	border-top:1px solid rgba(126, 79, 38, 0.14);
+}
+
+/* Diagrammi di Dynkin (progetti/WBase/dynkin.html) */
+.bar{
+	text-decoration:overline;
+}
+
+.dyn-grid{
+	display:grid;
+	grid-template-columns:repeat(auto-fill, minmax(400px, 1fr));
+	gap:18px;
+	margin-bottom:1.4rem;
+}
+
+.dyn-card{
+	min-width:0;
+	padding:16px 18px 12px;
+	border-radius:20px;
+	background:var(--white);
+	border:1px solid rgba(126, 79, 38, 0.1);
+	box-shadow:var(--shadow-soft);
+}
+
+.dyn-card.wide{
+	grid-column:1 / -1;
+}
+
+.post .dyn-card h3{
+	margin:0 0 2px;
+	font-size:1.3rem;
+}
+
+.dyn-meta,
+.dyn-note{
+	margin:0 0 8px;
+	font:0.82rem/1.45 "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+	color:var(--stone-500);
+}
+
+.dyn-note{
+	margin:6px 0 0;
+}
+
+.dyn-card svg.dyn{
+	display:block;
+	max-width:100%;
+	height:auto;
+	margin:4px auto 0;
+	overflow:visible;
+	font-family:"Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+.dyn .bond{ stroke:var(--stone-700); stroke-width:1.6; }
+.dyn .arrowhead{ fill:none; stroke:var(--stone-700); stroke-width:1.6; stroke-linejoin:round; }
+.dyn .node{ fill:var(--white); stroke:var(--sand-700); stroke-width:2; }
+.dyn .node.short{ fill:var(--sand-700); }
+.dyn .dimlab{ fill:var(--stone-900); font-size:12.5px; }
+.dyn .idx{ fill:var(--sand-500); font:bold 11.5px "Trebuchet MS", "Segoe UI", sans-serif; }
+
+.dyn-legend{
+	margin:0 0 1.2rem;
+	padding:0;
+	list-style:none;
+	font-size:0.95rem;
+}
+
+.dyn-legend li{
+	margin-bottom:0.4rem;
+}
+
+.dl-num,
+.dl-idx{
+	display:inline-block;
+	min-width:2.2rem;
+	text-align:center;
+}
+
+.dl-idx{
+	color:var(--sand-500);
+	font:bold 0.9rem "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.dl-node{
+	display:inline-block;
+	width:14px;
+	height:14px;
+	margin:0 4px 0 0.6rem;
+	vertical-align:-2px;
+	border-radius:50%;
+	border:2px solid var(--sand-700);
+	background:var(--white);
+}
+
+.dl-node:first-child{
+	margin-left:0.6rem;
+}
+
+.dl-node.short{
+	background:var(--sand-700);
+}
+
 @media (max-width: 640px){
 	.toc ol{
 		columns:1;

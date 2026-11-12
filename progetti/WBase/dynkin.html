@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<title>Diagrammi di Dynkin delle algebre di WBase | Antonio Candiello</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Antonio Candiello"/>
+	<meta name="copyright" content="Testi e contenuti Antonio Candiello"/>
+	<meta name="description" content="Diagrammi di Dynkin delle algebre di Lie semplici An, Bn, Cn, Dn, E6, E7, E8, F4, G2, numerati come li legge WBase, con le dimensioni delle rappresentazioni fondamentali."/>
+	<meta name="keywords" content="wbase, diagrammi di Dynkin, algebre di Lie, rappresentazioni fondamentali, irrep"/>
+	<link rel="alternate" hreflang="it" href="dynkin.html" />
+	<link rel="alternate" hreflang="en" href="dynkin-en.html" />
+	<link rel="stylesheet" type="text/css" href="../../css/screen.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/progetti.css" />
+	<script src="../../js/sections.js"></script>
+</head>
+<body>
+	<a name="top" id="top"></a>
+	<div id="page-wrap">
+
+		<!-- HEADER -->
+		<div id="header-wrap">
+			<div id="menu">
+				<ul>
+					<li><a href="../../index.html" title="home">Home</a></li>
+					<li><a href="../../index.html#articoli" title="pubblicazioni">Pubblicazioni</a></li>
+					<li><details><summary class="is-active" title="progetti">Progetti</summary>
+						<ul class="submenu">
+							<li><a href="index.html" title="WBase: come funziona e perché">WBase</a></li>
+							<li><a href="../PADigitale2026/index.html" title="Le misure di PA Digitale 2026">PA Digitale 2026</a></li>
+						</ul>
+					</details></li>
+					<li><a href="../../index.html#contatti" title="contatti">Contatti</a></li>
+				</ul>
+			</div>
+			<div id="logo-wrap"><h1>Antonio <br />Candiello</h1></div>
+			<div id="slogan">
+				<h4><b>Progetti</b> · WBase e le <b>rappresentazioni</b> delle <b>algebre di Lie</b></h4>
+			</div>
+			<div id="language">
+				<nav class="language-switch" aria-label="Lingua / Language">
+					<span class="is-current" title="Versione italiana" aria-current="page" lang="it">IT</span><a href="dynkin-en.html" title="English version" hreflang="en" lang="en">EN</a>
+				</nav>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!-- FINE HEADER -->
+
+		<div id="content-wrap" class="post">
+
+			<div class="content-box post-head">
+				<h2>Diagrammi di Dynkin delle algebre di WBase</h2>
+				<p class="byline">Antonio Candiello · <a href="index.html">WBase: come funziona e perché</a></p>
+				<p class="lead">Ogni algebra di Lie semplice è descritta da un diagramma di Dynkin: un nodo per ogni radice semplice, un legame fra due nodi quando le radici non sono ortogonali. Qui i diagrammi sono <b>numerati come li legge WBase</b>, così si sa in quale posizione scrivere ogni etichetta del peso massimo.</p>
+				<p>Per esempio, in E<sub>7</sub> la fondamentale 56 è (0 0 0 0 0 1 0) e l'aggiunta 133 è (1 0 0 0 0 0 0). Tutte le dimensioni sono calcolate con WBase V3.0 (comando <code>R</code>).</p>
+				<ul class="dyn-legend">
+						<li><span class="dl-num">27</span> sopra il nodo: dimensione della rappresentazione fondamentale, l'irrep con 1 in quella posizione e 0 altrove</li>
+						<li><span class="dl-idx">0</span> sotto il nodo: posizione dell'etichetta nell'input di WBase, da 0 a rango − 1</li>
+						<li><span class="dl-node"></span> radice lunga · <span class="dl-node short"></span> radice corta · nei legami doppi e tripli la freccia punta verso la radice corta</li>
+					</ul>
+				<div class="callout">
+					<p><b>Isomorfismi.</b> Alcune algebre di rango basso coincidono, con una diversa numerazione dei nodi:</p>
+					<ul>
+						<li>B<sub>2</sub> = C<sub>2</sub>: lo spinore (0 1) = 4 di B<sub>2</sub> è la fondamentale (1 0) di C<sub>2</sub>, e il vettore (1 0) = 5 di B<sub>2</sub> è la (0 1) di C<sub>2</sub>;</li>
+						<li>A<sub>3</sub> = D<sub>3</sub>, cioè SU(4) ≅ SO(6): il nodo centrale 1 di A<sub>3</sub> è il nodo 0 di D<sub>3</sub>;</li>
+						<li>E<sub>5</sub> = D<sub>5</sub>: WBase accetta E5 come nome alternativo;</li>
+						<li>D<sub>2</sub> = A<sub>1</sub> × A<sub>1</sub> non è semplice: WBase lo accetta come caso speciale, ma A<sub>1</sub> da sola no (il rango minimo è 2).</li>
+					</ul>
+					<p>A<sub>2</sub> invece non è isomorfa a B<sub>2</sub>: le due algebre hanno dimensione 8 e 10.</p>
+				</div>
+			</div>
+
+			<div class="content-box">
+				<a id="serie-a"></a>
+				<h2>Serie A: SU(n+1)</h2>
+				<p>Una catena di nodi tutti uguali. Le fondamentali sono le potenze antisimmetriche della rappresentazione di definizione: (1 0 … 0) e (0 … 0 1) sono la n+1 e la sua coniugata.</p>
+				<div class="dyn-grid">
+					<div class="dyn-card">
+						<h3>A<sub>2</sub></h3>
+						<p class="dyn-meta">SU(3) · rango 2 · dim 8 · <code>A2</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 146 88" width="146" height="88" role="img" aria-label="Diagramma di Dynkin di A2">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">3</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">3</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>A<sub>3</sub> = D<sub>3</sub></h3>
+						<p class="dyn-meta">SU(4) · rango 3 · dim 15 · <code>A3</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 212 88" width="212" height="88" role="img" aria-label="Diagramma di Dynkin di A3">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">4</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">6</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">4</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>A<sub>4</sub></h3>
+						<p class="dyn-meta">SU(5) · rango 4 · dim 24 · <code>A4</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 278 88" width="278" height="88" role="img" aria-label="Diagramma di Dynkin di A4">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">5</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">10</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">10</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">5</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>A<sub>5</sub></h3>
+						<p class="dyn-meta">SU(6) · rango 5 · dim 35 · <code>A5</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 344 88" width="344" height="88" role="img" aria-label="Diagramma di Dynkin di A5">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="264.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">6</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">15</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">20</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">15</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">6</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>A<sub>6</sub></h3>
+						<p class="dyn-meta">SU(7) · rango 6 · dim 48 · <code>A6</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 410 88" width="410" height="88" role="img" aria-label="Diagramma di Dynkin di A6">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="264.0" y2="0.0"/>
+						<line class="bond" x1="264.0" y1="0.0" x2="330.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">7</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">21</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">35</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">35</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">21</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						<circle class="node" cx="330.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="330.0" y="-17.0" text-anchor="middle">7</text>
+						<text class="idx" x="330.0" y="26.0" text-anchor="middle">5</text>
+						</svg>
+					</div>
+				</div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="serie-b"></a>
+				<h2>Serie B: SO(2n+1)</h2>
+				<p>Catena con l'ultima radice corta. L'ultimo nodo è lo spinore, di dimensione 2<sup>n</sup>; il primo è il vettore, di dimensione 2n+1.</p>
+				<div class="dyn-grid">
+					<div class="dyn-card">
+						<h3>B<sub>2</sub> = C<sub>2</sub></h3>
+						<p class="dyn-meta">SO(5) · rango 2 · dim 10 · <code>B2</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 146 88" width="146" height="88" role="img" aria-label="Diagramma di Dynkin di B2">
+						<line class="bond" x1="0.0" y1="-3.0" x2="66.0" y2="-3.0"/>
+						<line class="bond" x1="0.0" y1="3.0" x2="66.0" y2="3.0"/>
+						<path class="arrowhead" d="M26.0 -10.0 L40.0 0.0 L26.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">5</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node short" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">4</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>B<sub>3</sub></h3>
+						<p class="dyn-meta">SO(7) · rango 3 · dim 21 · <code>B3</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 212 88" width="212" height="88" role="img" aria-label="Diagramma di Dynkin di B3">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="-3.0" x2="132.0" y2="-3.0"/>
+						<line class="bond" x1="66.0" y1="3.0" x2="132.0" y2="3.0"/>
+						<path class="arrowhead" d="M92.0 -10.0 L106.0 0.0 L92.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">7</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">21</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node short" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">8</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>B<sub>4</sub></h3>
+						<p class="dyn-meta">SO(9) · rango 4 · dim 36 · <code>B4</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 278 88" width="278" height="88" role="img" aria-label="Diagramma di Dynkin di B4">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="-3.0" x2="198.0" y2="-3.0"/>
+						<line class="bond" x1="132.0" y1="3.0" x2="198.0" y2="3.0"/>
+						<path class="arrowhead" d="M158.0 -10.0 L172.0 0.0 L158.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">9</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">36</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">84</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node short" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">16</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>B<sub>5</sub></h3>
+						<p class="dyn-meta">SO(11) · rango 5 · dim 55 · <code>B5</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 344 88" width="344" height="88" role="img" aria-label="Diagramma di Dynkin di B5">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="-3.0" x2="264.0" y2="-3.0"/>
+						<line class="bond" x1="198.0" y1="3.0" x2="264.0" y2="3.0"/>
+						<path class="arrowhead" d="M224.0 -10.0 L238.0 0.0 L224.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">11</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">55</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">165</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">330</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node short" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">32</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>B<sub>6</sub></h3>
+						<p class="dyn-meta">SO(13) · rango 6 · dim 78 · <code>B6</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 410 88" width="410" height="88" role="img" aria-label="Diagramma di Dynkin di B6">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="264.0" y2="0.0"/>
+						<line class="bond" x1="264.0" y1="-3.0" x2="330.0" y2="-3.0"/>
+						<line class="bond" x1="264.0" y1="3.0" x2="330.0" y2="3.0"/>
+						<path class="arrowhead" d="M290.0 -10.0 L304.0 0.0 L290.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">13</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">78</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">286</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">715</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">1.287</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						<circle class="node short" cx="330.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="330.0" y="-17.0" text-anchor="middle">64</text>
+						<text class="idx" x="330.0" y="26.0" text-anchor="middle">5</text>
+						</svg>
+					</div>
+				</div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="serie-c"></a>
+				<h2>Serie C: Sp(2n)</h2>
+				<p>Catena con l'ultima radice lunga e tutte le altre corte. Il primo nodo è la rappresentazione di definizione, di dimensione 2n.</p>
+				<div class="dyn-grid">
+					<div class="dyn-card">
+						<h3>C<sub>2</sub> = B<sub>2</sub></h3>
+						<p class="dyn-meta">Sp(4) · rango 2 · dim 10 · <code>C2</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 146 88" width="146" height="88" role="img" aria-label="Diagramma di Dynkin di C2">
+						<line class="bond" x1="0.0" y1="-3.0" x2="66.0" y2="-3.0"/>
+						<line class="bond" x1="0.0" y1="3.0" x2="66.0" y2="3.0"/>
+						<path class="arrowhead" d="M40.0 -10.0 L26.0 0.0 L40.0 10.0"/>
+						<circle class="node short" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">4</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">5</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						</svg>
+						<p class="dyn-note">Stesso diagramma di B<sub>2</sub>, con i nodi scambiati.</p>
+					</div>
+					<div class="dyn-card">
+						<h3>C<sub>3</sub></h3>
+						<p class="dyn-meta">Sp(6) · rango 3 · dim 21 · <code>C3</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 212 88" width="212" height="88" role="img" aria-label="Diagramma di Dynkin di C3">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="-3.0" x2="132.0" y2="-3.0"/>
+						<line class="bond" x1="66.0" y1="3.0" x2="132.0" y2="3.0"/>
+						<path class="arrowhead" d="M106.0 -10.0 L92.0 0.0 L106.0 10.0"/>
+						<circle class="node short" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">6</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node short" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">14</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">14</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>C<sub>4</sub></h3>
+						<p class="dyn-meta">Sp(8) · rango 4 · dim 36 · <code>C4</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 278 88" width="278" height="88" role="img" aria-label="Diagramma di Dynkin di C4">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="-3.0" x2="198.0" y2="-3.0"/>
+						<line class="bond" x1="132.0" y1="3.0" x2="198.0" y2="3.0"/>
+						<path class="arrowhead" d="M172.0 -10.0 L158.0 0.0 L172.0 10.0"/>
+						<circle class="node short" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">8</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node short" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">27</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node short" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">48</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">42</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>C<sub>5</sub></h3>
+						<p class="dyn-meta">Sp(10) · rango 5 · dim 55 · <code>C5</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 344 88" width="344" height="88" role="img" aria-label="Diagramma di Dynkin di C5">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="-3.0" x2="264.0" y2="-3.0"/>
+						<line class="bond" x1="198.0" y1="3.0" x2="264.0" y2="3.0"/>
+						<path class="arrowhead" d="M238.0 -10.0 L224.0 0.0 L238.0 10.0"/>
+						<circle class="node short" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">10</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node short" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">44</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node short" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">110</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node short" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">165</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">132</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						</svg>
+					</div>
+				</div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="serie-d"></a>
+				<h2>Serie D: SO(2n)</h2>
+				<p>Catena che termina con una forcella: i due nodi finali n−2 e n−1 sono i due spinori, di dimensione 2<sup>n−1</sup>, entrambi attaccati al nodo n−3.</p>
+				<div class="dyn-grid">
+					<div class="dyn-card">
+						<h3>D<sub>2</sub> = A<sub>1</sub> × A<sub>1</sub></h3>
+						<p class="dyn-meta">SO(4) · rango 2 · dim 6 · <code>D2</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 146 88" width="146" height="88" role="img" aria-label="Diagramma di Dynkin di D2">
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">2</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">2</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						</svg>
+						<p class="dyn-note">Due nodi non collegati: l'algebra non è semplice.</p>
+					</div>
+					<div class="dyn-card">
+						<h3>D<sub>3</sub> = A<sub>3</sub></h3>
+						<p class="dyn-meta">SO(6) · rango 3 · dim 15 · <code>D3</code></p>
+						<svg class="fig dyn" viewBox="-40 -82 177 164" width="177" height="164" role="img" aria-label="Diagramma di Dynkin di D3">
+						<line class="bond" x1="0.0" y1="0.0" x2="51.5" y2="-38.0"/>
+						<line class="bond" x1="0.0" y1="0.0" x2="51.5" y2="38.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">6</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="51.5" cy="-38.0" r="9"/>
+						<text class="dimlab" x="67.5" y="-37.0">4</text>
+						<text class="idx" x="67.5" y="-22.0">1</text>
+						<circle class="node" cx="51.5" cy="38.0" r="9"/>
+						<text class="dimlab" x="67.5" y="39.0">4</text>
+						<text class="idx" x="67.5" y="54.0">2</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>D<sub>4</sub></h3>
+						<p class="dyn-meta">SO(8) · rango 4 · dim 28 · <code>D4</code></p>
+						<svg class="fig dyn" viewBox="-40 -82 243 164" width="243" height="164" role="img" aria-label="Diagramma di Dynkin di D4">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="117.5" y2="-38.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="117.5" y2="38.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">8</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">28</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="117.5" cy="-38.0" r="9"/>
+						<text class="dimlab" x="133.5" y="-37.0">8</text>
+						<text class="idx" x="133.5" y="-22.0">2</text>
+						<circle class="node" cx="117.5" cy="38.0" r="9"/>
+						<text class="dimlab" x="133.5" y="39.0">8</text>
+						<text class="idx" x="133.5" y="54.0">3</text>
+						</svg>
+						<p class="dyn-note">Il vettore 8 e i due spinori 8 si scambiano fra loro (triality).</p>
+					</div>
+					<div class="dyn-card">
+						<h3>D<sub>5</sub> = E<sub>5</sub></h3>
+						<p class="dyn-meta">SO(10) · rango 5 · dim 45 · <code>D5</code></p>
+						<svg class="fig dyn" viewBox="-40 -82 309 164" width="309" height="164" role="img" aria-label="Diagramma di Dynkin di D5">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="183.5" y2="-38.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="183.5" y2="38.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">10</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">45</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">120</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="183.5" cy="-38.0" r="9"/>
+						<text class="dimlab" x="199.5" y="-37.0">16</text>
+						<text class="idx" x="199.5" y="-22.0">3</text>
+						<circle class="node" cx="183.5" cy="38.0" r="9"/>
+						<text class="dimlab" x="199.5" y="39.0">16</text>
+						<text class="idx" x="199.5" y="54.0">4</text>
+						</svg>
+					</div>
+					<div class="dyn-card">
+						<h3>D<sub>6</sub></h3>
+						<p class="dyn-meta">SO(12) · rango 6 · dim 66 · <code>D6</code></p>
+						<svg class="fig dyn" viewBox="-40 -82 375 164" width="375" height="164" role="img" aria-label="Diagramma di Dynkin di D6">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="249.5" y2="-38.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="249.5" y2="38.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">12</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">66</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">220</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">495</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="249.5" cy="-38.0" r="9"/>
+						<text class="dimlab" x="265.5" y="-37.0">32</text>
+						<text class="idx" x="265.5" y="-22.0">4</text>
+						<circle class="node" cx="249.5" cy="38.0" r="9"/>
+						<text class="dimlab" x="265.5" y="39.0">32</text>
+						<text class="idx" x="265.5" y="54.0">5</text>
+						</svg>
+					</div>
+				</div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+
+			<div class="content-box">
+				<a id="eccezionali"></a>
+				<h2>Algebre eccezionali</h2>
+				<p>In E<sub>n</sub> WBase usa una catena 0 … n−2 con il nodo n−1 attaccato al nodo 2. F<sub>4</sub> ha due radici lunghe e due corte, G<sub>2</sub> una lunga e una corta.</p>
+				<div class="dyn-grid">
+					<div class="dyn-card">
+						<h3>E<sub>5</sub> = D<sub>5</sub></h3>
+						<p class="dyn-meta">rango 5 · dim 45 · <code>E5</code></p>
+						<svg class="fig dyn" viewBox="-40 -82 309 164" width="309" height="164" role="img" aria-label="Diagramma di Dynkin di E5">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="183.5" y2="-38.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="183.5" y2="38.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">10</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">45</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">120</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node" cx="183.5" cy="-38.0" r="9"/>
+						<text class="dimlab" x="199.5" y="-37.0">16</text>
+						<text class="idx" x="199.5" y="-22.0">3</text>
+						<circle class="node" cx="183.5" cy="38.0" r="9"/>
+						<text class="dimlab" x="199.5" y="39.0">16</text>
+						<text class="idx" x="199.5" y="54.0">4</text>
+						</svg>
+						<p class="dyn-note">Il nodo 4 attaccato al nodo 2 dà la forcella di D<sub>5</sub>.</p>
+					</div>
+					<div class="dyn-card">
+						<h3>E<sub>6</sub></h3>
+						<p class="dyn-meta">rango 6 · dim 78 · <code>E6</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 344 150" width="344" height="150" role="img" aria-label="Diagramma di Dynkin di E6">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="0.0" x2="132.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<line class="bond" x1="198.0" y1="0.0" x2="264.0" y2="0.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="132.0" y2="62.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">27</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">351</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">2.925</text>
+						<text class="idx" x="121.0" y="26.0" text-anchor="end">2</text>
+						<circle class="node" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">351</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="264.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="264.0" y="-17.0" text-anchor="middle">27</text>
+						<text class="idx" x="264.0" y="26.0" text-anchor="middle">4</text>
+						<circle class="node" cx="132.0" cy="62.0" r="9"/>
+						<text class="dimlab" x="148.0" y="63.0">78</text>
+						<text class="idx" x="148.0" y="78.0">5</text>
+						</svg>
+						<p class="dyn-note">Le fondamentali 27 e <span class="bar">27</span> sono i nodi 0 e 4; l'aggiunta 78 è il nodo 5.</p>
+					</div>
+					<div class="dyn-card">
+						<h3>E<sub>7</sub></h3>
+						<p class="dyn-meta">rango 7 · dim 133 · <code>E7</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 435 150" width="435" height="150" role="img" aria-label="Diagramma di Dynkin di E7">
+						<line class="bond" x1="0.0" y1="0.0" x2="71.0" y2="0.0"/>
+						<line class="bond" x1="71.0" y1="0.0" x2="142.0" y2="0.0"/>
+						<line class="bond" x1="142.0" y1="0.0" x2="213.0" y2="0.0"/>
+						<line class="bond" x1="213.0" y1="0.0" x2="284.0" y2="0.0"/>
+						<line class="bond" x1="284.0" y1="0.0" x2="355.0" y2="0.0"/>
+						<line class="bond" x1="142.0" y1="0.0" x2="142.0" y2="62.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">133</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="71.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="71.0" y="-17.0" text-anchor="middle">8.645</text>
+						<text class="idx" x="71.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="142.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="142.0" y="-17.0" text-anchor="middle">365.750</text>
+						<text class="idx" x="131.0" y="26.0" text-anchor="end">2</text>
+						<circle class="node" cx="213.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="213.0" y="-17.0" text-anchor="middle">27.664</text>
+						<text class="idx" x="213.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="284.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="284.0" y="-17.0" text-anchor="middle">1.539</text>
+						<text class="idx" x="284.0" y="26.0" text-anchor="middle">4</text>
+						<circle class="node" cx="355.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="355.0" y="-17.0" text-anchor="middle">56</text>
+						<text class="idx" x="355.0" y="26.0" text-anchor="middle">5</text>
+						<circle class="node" cx="142.0" cy="62.0" r="9"/>
+						<text class="dimlab" x="158.0" y="63.0">912</text>
+						<text class="idx" x="158.0" y="78.0">6</text>
+						</svg>
+						<p class="dyn-note">La fondamentale 56 è il nodo 5; l'aggiunta 133 è il nodo 0.</p>
+					</div>
+					<div class="dyn-card wide">
+						<h3>E<sub>8</sub></h3>
+						<p class="dyn-meta">rango 8 · dim 248 · <code>E8</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 758 150" width="758" height="150" role="img" aria-label="Diagramma di Dynkin di E8">
+						<line class="bond" x1="0.0" y1="0.0" x2="113.0" y2="0.0"/>
+						<line class="bond" x1="113.0" y1="0.0" x2="226.0" y2="0.0"/>
+						<line class="bond" x1="226.0" y1="0.0" x2="339.0" y2="0.0"/>
+						<line class="bond" x1="339.0" y1="0.0" x2="452.0" y2="0.0"/>
+						<line class="bond" x1="452.0" y1="0.0" x2="565.0" y2="0.0"/>
+						<line class="bond" x1="565.0" y1="0.0" x2="678.0" y2="0.0"/>
+						<line class="bond" x1="226.0" y1="0.0" x2="226.0" y2="62.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">3.875</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="113.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="113.0" y="-17.0" text-anchor="middle">6.696.000</text>
+						<text class="idx" x="113.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node" cx="226.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="226.0" y="-17.0" text-anchor="middle">6.899.079.264</text>
+						<text class="idx" x="215.0" y="26.0" text-anchor="end">2</text>
+						<circle class="node" cx="339.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="339.0" y="-17.0" text-anchor="middle">146.325.270</text>
+						<text class="idx" x="339.0" y="26.0" text-anchor="middle">3</text>
+						<circle class="node" cx="452.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="452.0" y="-17.0" text-anchor="middle">2.450.240</text>
+						<text class="idx" x="452.0" y="26.0" text-anchor="middle">4</text>
+						<circle class="node" cx="565.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="565.0" y="-17.0" text-anchor="middle">30.380</text>
+						<text class="idx" x="565.0" y="26.0" text-anchor="middle">5</text>
+						<circle class="node" cx="678.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="678.0" y="-17.0" text-anchor="middle">248</text>
+						<text class="idx" x="678.0" y="26.0" text-anchor="middle">6</text>
+						<circle class="node" cx="226.0" cy="62.0" r="9"/>
+						<text class="dimlab" x="242.0" y="63.0">147.250</text>
+						<text class="idx" x="242.0" y="78.0">7</text>
+						</svg>
+						<p class="dyn-note">L'aggiunta 248 (nodo 6) è anche la più piccola rappresentazione non banale.</p>
+					</div>
+					<div class="dyn-card">
+						<h3>F<sub>4</sub></h3>
+						<p class="dyn-meta">rango 4 · dim 52 · <code>F4</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 278 88" width="278" height="88" role="img" aria-label="Diagramma di Dynkin di F4">
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="66.0" y1="-3.0" x2="132.0" y2="-3.0"/>
+						<line class="bond" x1="66.0" y1="3.0" x2="132.0" y2="3.0"/>
+						<path class="arrowhead" d="M92.0 -10.0 L106.0 0.0 L92.0 10.0"/>
+						<line class="bond" x1="132.0" y1="0.0" x2="198.0" y2="0.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">52</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">1.274</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						<circle class="node short" cx="132.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="132.0" y="-17.0" text-anchor="middle">273</text>
+						<text class="idx" x="132.0" y="26.0" text-anchor="middle">2</text>
+						<circle class="node short" cx="198.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="198.0" y="-17.0" text-anchor="middle">26</text>
+						<text class="idx" x="198.0" y="26.0" text-anchor="middle">3</text>
+						</svg>
+						<p class="dyn-note">Le più piccole sono la 26 (nodo 3) e l'aggiunta 52 (nodo 0).</p>
+					</div>
+					<div class="dyn-card">
+						<h3>G<sub>2</sub></h3>
+						<p class="dyn-meta">rango 2 · dim 14 · <code>G2</code></p>
+						<svg class="fig dyn" viewBox="-40 -44 146 88" width="146" height="88" role="img" aria-label="Diagramma di Dynkin di G2">
+						<line class="bond" x1="0.0" y1="-4.5" x2="66.0" y2="-4.5"/>
+						<line class="bond" x1="0.0" y1="0.0" x2="66.0" y2="0.0"/>
+						<line class="bond" x1="0.0" y1="4.5" x2="66.0" y2="4.5"/>
+						<path class="arrowhead" d="M26.0 -10.0 L40.0 0.0 L26.0 10.0"/>
+						<circle class="node" cx="0.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="0.0" y="-17.0" text-anchor="middle">14</text>
+						<text class="idx" x="0.0" y="26.0" text-anchor="middle">0</text>
+						<circle class="node short" cx="66.0" cy="0.0" r="9"/>
+						<text class="dimlab" x="66.0" y="-17.0" text-anchor="middle">7</text>
+						<text class="idx" x="66.0" y="26.0" text-anchor="middle">1</text>
+						</svg>
+						<p class="dyn-note">La 7 (nodo 1, corto) e l'aggiunta 14 (nodo 0, lungo).</p>
+					</div>
+				</div>
+				<a href="#top" title="torna su">Torna su</a>
+			</div>
+		</div>
+
+		<!-- FOOTER -->
+		<div id="footer-wrap">
+			<p>Antonio Candiello | Profilo professionale, pubblicazioni e attività</p>
+			<p class="ai-disclaimer">Questo sito è stato realizzato con il supporto di strumenti di intelligenza artificiale per la stesura del codice, l’impaginazione e le traduzioni. Tutti i contenuti sono stati redatti o verificati dall’autore, che ne è l’unico responsabile.</p>
+		</div>
+		<!-- FINE FOOTER -->
+	</div>
+</body>
+</html>
